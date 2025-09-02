@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.products {
+  flex: 3; /* ocupa más espacio */
+}
+
+.cart {
+  flex: 1; /* más angosto */
+}
