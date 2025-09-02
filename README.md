@@ -122,19 +122,6 @@ ng serve -o
 
 ---
 
-## 📌 Flujo de trabajo diario
-
-### Backend
-- Crear/editar modelos → `flask db migrate -m "mensaje"`  
-- Aplicar migraciones → `flask db upgrade`  
-- Ejecutar seeders → `python seed.py`  
-
-### Frontend
-- Modificar componentes y servicios  
-- Levantar dev server → `ng serve -o`  
-
----
-
 ## 📡 Ejemplos de endpoints
 
 | Método | Endpoint | Descripción |
