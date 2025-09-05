@@ -1,0 +1,120 @@
+/* ==============================
+   PLUS JAKARTA SANS - FONTS
+   ============================== */
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('.assets/fonts/PlusJakartaSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* ==============================
+   CLASES UTILITARIAS
+   ============================== */
+
+.font-regular     { font-family: 'PlusJakartaSans', sans-serif; font-weight: 400; }
+.font-italic      { font-family: 'PlusJakartaSans', sans-serif; font-weight: 400; font-style: italic; }
+.font-light       { font-family: 'PlusJakartaSans', sans-serif; font-weight: 300; }
+.font-light-italic{ font-family: 'PlusJakartaSans', sans-serif; font-weight: 300; font-style: italic; }
+.font-extralight  { font-family: 'PlusJakartaSans', sans-serif; font-weight: 200; }
+.font-extralight-italic { font-family: 'PlusJakartaSans', sans-serif; font-weight: 200; font-style: italic; }
+.font-medium      { font-family: 'PlusJakartaSans', sans-serif; font-weight: 500; }
+.font-medium-italic { font-family: 'PlusJakartaSans', sans-serif; font-weight: 500; font-style: italic; }
+.font-semibold    { font-family: 'PlusJakartaSans', sans-serif; font-weight: 600; }
+.font-semibold-italic { font-family: 'PlusJakartaSans', sans-serif; font-weight: 600; font-style: italic; }
+.font-bold        { font-family: 'PlusJakartaSans', sans-serif; font-weight: 700; }
+.font-bold-italic { font-family: 'PlusJakartaSans', sans-serif; font-weight: 700; font-style: italic; }
+.font-extrabold   { font-family: 'PlusJakartaSans', sans-serif; font-weight: 800; }
+.font-extrabold-italic { font-family: 'PlusJakartaSans', sans-serif; font-weight: 800; font-style: italic; }

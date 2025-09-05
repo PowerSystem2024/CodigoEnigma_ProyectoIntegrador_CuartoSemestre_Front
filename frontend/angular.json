@@ -90,7 +90,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/ionicons/dist/css/ionicons.min.css",
+              "src/styles.scss",
+              "src/assets/styles/fonts.scss"
             ],
             "scripts": []
           }
