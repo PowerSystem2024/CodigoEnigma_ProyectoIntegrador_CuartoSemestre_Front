@@ -1,164 +1,27 @@
-# 🚀 Proyecto E-commerce Fullstack
+# Frontend
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![Flask](https://img.shields.io/badge/Flask-3.1.0-orange)
-![Angular](https://img.shields.io/badge/Angular-17+-red)
-![MySQL](https://img.shields.io/badge/MySQL-8+-blue)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
-> Proyecto Fullstack con **Flask + SQLAlchemy + Migrations + Seeders + Angular + MySQL**.
+## Development server
 
----
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## 🗂 Estructura del proyecto
+## Code scaffolding
 
-- Backend en Flask  
-- Frontend en Angular  
-- DB en MySQL  
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
----
+## Build
 
-## ⚙️ Requisitos previos
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-- Python 3.10+  
-- Node.js 18+ y npm  
-- Angular CLI (`npm i -g @angular/cli`)  
-- MySQL 8+  
+## Running unit tests
 
----
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## 🐍 Backend (Flask + MySQL)
+## Running end-to-end tests
 
-### 1️⃣ Configuración de la base de datos
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-Ingresar a MySQL:
+## Further help
 
-```sql
-CREATE DATABASE proyecto_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-CREATE USER 'proyecto_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'proyecto_pass';
-GRANT ALL PRIVILEGES ON proyecto_db.* TO 'proyecto_user'@'localhost';
-FLUSH PRIVILEGES;
-```
-
-### 2️⃣ Configurar .env
-
-Copiar `.env.example` a `.env` y completar con tus datos reales:
-
-```env
-DB_USER=proyecto_user
-DB_PASSWORD=proyecto_pass
-DB_HOST=localhost
-DB_NAME=proyecto_db
-FLASK_ENV=development
-FLASK_APP=app.py
-FLASK_DEBUG=1
-```
-
-### 3️⃣ Setup completo backend
-
-Abrir PowerShell en `backend/` y permitir scripts:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-
-Ejecutar el script:
-
-```powershell
-.\setup.ps1
-```
-
-Esto hace:
-
-- Crear y activar entorno virtual `.venv`  
-- Instalar dependencias (`requirements.txt`)  
-- Inicializar migraciones (`flask db init`)  
-- Generar migración inicial (`flask db migrate`)  
-- Aplicar migración (`flask db upgrade`)  
-
-### 4️⃣ Correr backend Flask
-
-```powershell
-flask --app app run --debug
-```
-
-### 5️⃣ Ejecutar seeders
-
-```powershell
-python seed.py
-```
-
----
-
-## 🟢 Frontend (Angular)
-
-### 1️⃣ Configuración de environment
-
-Copiar `environment.example.ts` a `environment.ts` y completar `apiUrl`:
-
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://127.0.0.1:5000'
-};
-```
-
-Para producción, configurar `environment.prod.ts` con la URL real del backend:
-
-```typescript
-export const environment = {
-  production: true,
-  apiUrl: 'https://api.tusitio.com'
-};
-```
-
-### 2️⃣ Levantar dev server
-
-```bash
-cd frontend
-npm install
-ng serve -o
-```
-
----
-
-## 📡 Ejemplos de endpoints
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET    | /users   | Obtener todos los usuarios |
-| POST   | /users   | Crear un usuario `{name, email}` |
-
----
-
-## ⚠️ Notas importantes
-
-- No subir `.env` ni `environment.ts` con datos sensibles a GitHub.  
-- CORS ya habilitado en Flask.  
-
-URI de SQLAlchemy para MySQL:
-
-```python
-"mysql+pymysql://user:pass@localhost/dbname"
-```
-
-Activar entorno virtual:
-
-```powershell
-. .\.venv\Scripts\Activate.ps1
-```
-
-Salir del entorno:
-
-```powershell
-deactivate
-```
-
-Para agregar nuevas migraciones:
-
-```powershell
-python -m flask --app app db migrate -m "mensaje"
-python -m flask --app app db upgrade
-```
-
-Seeders: todos los archivos dentro de `seeders/` y ejecutarlos desde `seed.py`.  
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
