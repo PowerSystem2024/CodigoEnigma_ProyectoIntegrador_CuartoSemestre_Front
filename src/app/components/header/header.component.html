@@ -1,3 +1,35 @@
-<header>
-  <h1>Mi Tienda</h1>
-</header>
+<div class="left">
+  <img src="assets/images/logo.png" alt="logo" class="logo"/>
+  <span class="title">Mi App</span>
+</div>
+
+<div class="center">
+  <nb-actions size="medium">
+    <nb-action>
+      <a href="">Home</a>
+    </nb-action>
+    <nb-action>
+      <a href="">Catalogo</a>
+    </nb-action>
+    <nb-action>
+      <a href="">Contacto</a>
+    </nb-action>
+  </nb-actions>
+</div>
+
+<div class="right">
+  <nb-actions size="medium">
+    <nb-action>
+      <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
+    </nb-action>
+    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" badgeText="12"
+               badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
+    <ng-template #cart>
+      <app-cart></app-cart>
+    </ng-template>
+    <nb-action icon="person-outline" [nbPopover]="user" nbPopoverPlacement="bottom" title="User"></nb-action>
+    <ng-template #user>
+      <nb-menu [items]="userMenu"></nb-menu>
+    </ng-template>
+  </nb-actions>
+</div>
