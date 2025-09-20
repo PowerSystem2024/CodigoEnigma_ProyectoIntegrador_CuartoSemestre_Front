@@ -1,5 +1,12 @@
 .product-card {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
 
+.product-card:hover {
+    color: var(--secondary-color);
+    transform: scale(1.02);
 }
 
 .product-img {

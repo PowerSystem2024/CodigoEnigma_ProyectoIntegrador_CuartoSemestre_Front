@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
 import { CommonModule } from '@angular/common';
 import { NbLayoutModule } from "@nebular/theme";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,8 @@ import { NbLayoutModule } from "@nebular/theme";
   imports: [
     CommonModule,
     HeaderComponent,
-    ProductListComponent,
-    NbLayoutModule
+    NbLayoutModule,
+    RouterOutlet
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
