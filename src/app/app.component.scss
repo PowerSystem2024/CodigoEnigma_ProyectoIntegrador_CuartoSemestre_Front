@@ -1,13 +1,5 @@
-.container {
+app-header {
   display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-
-.products {
-  flex: 3;
-}
-
-.cart {
-  flex: 1;
+  justify-content: space-between;
+  width: 100%;
 }

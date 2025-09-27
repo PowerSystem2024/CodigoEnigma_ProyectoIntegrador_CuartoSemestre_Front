@@ -2,10 +2,17 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
-
 import { AppComponent } from './app/app.component';
 
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbUserModule,
+  NbButtonModule,
+  NbIconModule,
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 bootstrapApplication(AppComponent, {
@@ -15,7 +22,12 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       NbThemeModule.forRoot({ name: 'default' }),
       NbLayoutModule,
+      NbSidebarModule.forRoot(),
+      NbMenuModule.forRoot(),
+      NbUserModule,
+      NbButtonModule,
+      NbIconModule,
       NbEvaIconsModule,
-    )
+    ),
   ],
 });

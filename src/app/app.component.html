@@ -1,12 +1,11 @@
-<div class="app-main-container">
-  <app-header></app-header>
-  
-  <div class="container">
-    <div class="products">
-      <app-product-list></app-product-list>
-    </div>
-    <div class="cart">
-      <app-cart></app-cart>
-    </div>
-  </div>
-</div>
+<nb-layout>
+  <nb-layout-header fixed class="space-between">
+    <app-header></app-header>
+  </nb-layout-header>
+  <nb-layout-column>
+    <app-product-list></app-product-list>
+  </nb-layout-column>
+  <nb-layout-footer>
+    Contact us
+  </nb-layout-footer>
+</nb-layout>
