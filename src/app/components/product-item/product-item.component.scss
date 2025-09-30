@@ -39,3 +39,9 @@
     font-size: 18px;
     font-weight: 200;
 }
+
+@media screen and (max-width: 600px) {
+    .product-stars {
+        display: none;
+    }
+}

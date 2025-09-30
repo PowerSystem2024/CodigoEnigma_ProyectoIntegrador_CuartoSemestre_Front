@@ -12,6 +12,7 @@ import {
   NbCardModule,
   NbIconModule,
   NbSearchModule,
+  NbButtonGroupModule,
 } from '@nebular/theme';
 
 @NgModule({
@@ -27,6 +28,7 @@ import {
     NbCardModule,
     NbIconModule,
     NbSearchModule,
+    NbButtonGroupModule,
   ],
   exports: [
     CommonModule,
@@ -40,6 +42,7 @@ import {
     NbCardModule,
     NbIconModule,
     NbSearchModule,
+    NbButtonGroupModule,
   ]
 })
 export class NebularModule {}

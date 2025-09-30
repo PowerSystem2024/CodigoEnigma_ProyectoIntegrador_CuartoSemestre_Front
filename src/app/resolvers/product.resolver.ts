@@ -6,6 +6,6 @@ import { Product } from '../models/product.model';
 
 export const productResolver: ResolveFn<Product> = (route: ActivatedRouteSnapshot) => {
   const productService = inject(ProductService);
-  const id = route.paramMap.get('id')!;
+  const id = route.paramMap.get('product_id')!;
   return productService.getProduct(id);
 };
