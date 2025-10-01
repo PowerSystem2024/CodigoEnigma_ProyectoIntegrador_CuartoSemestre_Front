@@ -1,0 +1,112 @@
+<nb-card>
+  <nb-card-header>
+    <h5>Crear Cuenta</h5>
+    <button nbButton
+            ghost
+            size="small"
+            (click)="onCancel()"
+            title="Cerrar diálogo de registro"
+            aria-label="Cerrar diálogo de registro">
+      <nb-icon icon="close-outline" aria-hidden="true"></nb-icon>
+    </button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Campo Nombre -->
+      <div class="form-group">
+        <label for="name" class="label">Nombre completo</label>
+        <input
+          nbInput
+          fullWidth
+          id="name"
+          formControlName="name"
+          placeholder="Ingresa tu nombre completo"
+          [status]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched ? 'danger' : 'basic'"
+          aria-describedby="name-error"
+        >
+        <small id="name-error" class="text-danger" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+          El nombre es requerido
+        </small>
+      </div>
+
+      <!-- Campo Email -->
+      <div class="form-group">
+        <label for="email" class="label">Email</label>
+        <input
+          nbInput
+          fullWidth
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@email.com"
+          [status]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'danger' : 'basic'"
+          aria-describedby="email-error"
+        >
+        <small id="email-error" class="text-danger" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Email inválido</span>
+        </small>
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-group">
+        <label for="password" class="label">Contraseña</label>
+        <input
+          nbInput
+          fullWidth
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Mínimo 6 caracteres"
+          [status]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'danger' : 'basic'"
+          aria-describedby="password-error"
+        >
+        <small id="password-error" class="text-danger" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es requerida</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Mínimo 6 caracteres requeridos</span>
+        </small>
+      </div>
+
+      <!-- Mensaje de error general -->
+      <div *ngIf="error" class="alert alert-danger" role="alert" aria-live="polite">
+        <nb-icon icon="alert-circle-outline" aria-hidden="true"></nb-icon>
+        {{ error }}
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="button-group">
+        <button
+          nbButton
+          fullWidth
+          status="primary"
+          type="submit"
+          [disabled]="registerForm.invalid || loading"
+          [attr.aria-busy]="loading"
+          aria-describedby="form-errors"
+        >
+          <nb-icon *ngIf="loading" icon="loader-outline" [options]="{ animation: { type: 'pulse' } }" aria-hidden="true"></nb-icon>
+          {{ loading ? 'Registrando...' : 'Crear Cuenta' }}
+        </button>
+
+        <button
+          nbButton
+          fullWidth
+          status="basic"
+          type="button"
+          (click)="onCancel()"
+          [disabled]="loading"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <!-- Contenedor para errores de formulario (accesibilidad) -->
+      <div id="form-errors" class="sr-only" aria-live="polite">
+        <span *ngIf="registerForm.invalid">El formulario contiene errores. Por favor revisa los campos.</span>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>

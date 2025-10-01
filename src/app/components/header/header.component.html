@@ -13,7 +13,7 @@
     <nb-action>
       <a href="/products">Catalogo</a>
     </nb-action>
-    <nb-action> 
+    <nb-action>
       <a href="/my-order">My Order</a>
     </nb-action>
   </nb-actions>
@@ -24,6 +24,20 @@
     <nb-action>
       <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
     </nb-action>
+
+  <!-- BOTÓN DE REGISTRO - AGREGADO -->
+    <nb-action>
+      <button nbButton
+              ghost
+              size="small"
+              (click)="openRegisterDialog()"
+              title="Crear una nueva cuenta"
+              aria-label="Crear una nueva cuenta">
+        <nb-icon icon="person-add-outline" aria-hidden="true"></nb-icon>
+        <span class="button-text">Registrarse</span>
+      </button>
+    </nb-action>
+
     <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" badgeText="12"
                badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
     <ng-template #cart>
