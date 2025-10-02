@@ -20,23 +20,23 @@
   font-weight: 600; 
   font-size: 1.25rem;
 }
-
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
 nb-menu {
   width: 13rem;
 }
-
 ::ng-deep .search nb-icon {
   height: 30px !important;
   width: 30px !important;
 }
-
-nb-action {
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+nb-action a, .logo-container {
+  color: inherit;
+  text-decoration: none;
 }
-
 @media (max-width: 800px) {
   .center { display: none; }
 }
