@@ -31,6 +31,7 @@ export class RegisterDialogComponent {
   loading = false;
   error: string | null = null;
 
+  // AuthService:
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
