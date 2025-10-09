@@ -1,25 +1,9 @@
 import { Component } from '@angular/core';
 
-
-// se agrega esto de product details
 import { OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { NbAccordionModule, NbCardModule } from '@nebular/theme';
-
-/*
-Se saca este de product details
-@Component({
-  selector: 'app-product-details',
-  standalone: true,
-  imports: [],
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
-})
-export class ProductDetailsComponent {
-
-}
-*/
 
 
 // y esto con el import de arriba
@@ -31,7 +15,7 @@ export class ProductDetailsComponent {
   styleUrls: ['./noticias.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductDetailsComponent implements OnInit {
+export class NoticiasComponent implements OnInit {
 
   product: any; // Variable para guardar los datos del producto
 

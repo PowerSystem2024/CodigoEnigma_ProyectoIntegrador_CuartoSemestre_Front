@@ -27,6 +27,7 @@ import {
     NbCardModule,
     NbIconModule,
     NbSearchModule,
+    
   ],
   exports: [
     CommonModule,
@@ -43,3 +44,4 @@ import {
   ]
 })
 export class NebularModule {}
+
