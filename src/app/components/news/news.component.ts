@@ -8,14 +8,14 @@ import { NbAccordionModule, NbCardModule } from '@nebular/theme';
 
 // y esto con el import de arriba
 @Component({
-  selector: 'app-noticias',
+  selector: 'app-news',
   standalone: true,
   imports: [CommonModule, NbAccordionModule, NbCardModule], // Módulos necesarios
-  templateUrl: './noticias.component.html',
-  styleUrls: ['./noticias.component.scss'],
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NoticiasComponent implements OnInit {
+export class NewsComponent implements OnInit {
 
   product: any; // Variable para guardar los datos del producto
 
