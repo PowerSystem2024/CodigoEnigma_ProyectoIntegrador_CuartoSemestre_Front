@@ -1,25 +1,125 @@
+// register-dialog.component.scss - VERSIÓN MEJORADA
 .register-card {
-  width: 360px;
+  width: 400px;
   max-width: 95vw;
+  background: var(--background-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 
-  .field {
-    margin-bottom: 12px;
+  // Header
+  nb-card-header {
+    background: var(--banner-color);
+    color: var(--banner-text-color);
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h5 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+
+    .close-button {
+      color: var(--banner-text-color);
+      background: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
   }
 
-  .actions {
+  // Body
+  nb-card-body {
+    padding: 1.5rem;
+  }
+
+  // Formulario
+  .register-form {
+    .form-group {
+      margin-bottom: 1.25rem;
+
+      .label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        font-size: 0.875rem;
+      }
+
+      input {
+        border-radius: 6px;
+
+        &:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 3px rgba(37, 97, 68, 0.1);
+        }
+      }
+    }
+  }
+
+  // Botones
+  .button-group {
     display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 8px;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+
+    .submit-button, .cancel-button {
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .submit-button {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--primary-color-text);
+
+      &:hover:not(:disabled) {
+        background: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        background: var(--terciary-color);
+        border-color: var(--terciary-color);
+        opacity: 0.6;
+      }
+    }
+
+    .cancel-button {
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+
+      &:hover:not(:disabled) {
+        background: var(--terciary-color);
+      }
+    }
   }
 
-  .error, .api-error {
-    color: #ff3860;
-    font-size: 12px;
-    margin-top: 4px;
+  // Estados de loading
+  button[aria-busy="true"] nb-icon {
+  animation: spin 1s linear infinite;
   }
+}
 
-  // Clase para elementos solo lectores de pantalla
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Mantener utilidades de accesibilidad
 .sr-only {
   position: absolute;
   width: 1px;
@@ -30,26 +130,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-// Asegurar que el texto del botón sea visible
-.button-text {
-  margin-left: 0.25rem;
-}
-
-// Mejorar contraste para accesibilidad
-.label {
-  color: #2d3748; // Color más oscuro para mejor contraste
-}
-
-.text-danger {
-  color: #c53030; // Rojo más oscuro para mejor contraste
-}
-
-// Estilos para estados de foco (importante para navegación con teclado)
-button:focus,
-input:focus {
-  outline: 2px solid #4299e1;
-  outline-offset: 2px;
-}
 }
