@@ -31,7 +31,6 @@ export class RegisterDialogComponent {
   loading = false;
   error: string | null = null;
 
-  // AuthService:
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -58,7 +57,11 @@ export class RegisterDialogComponent {
       finalize(() => this.loading = false)
     ).subscribe((res: RegisterResponse | null) => {
       if (res) {
+        // ✅ GUARDAR USUARIO EN LOCALSTORAGE PARA MOSTRAR EN HEADER
+        localStorage.setItem('currentUser', JSON.stringify(res.user));
         localStorage.setItem('userid', res.token);
+
+        console.log('✅ Usuario registrado y guardado:', res.user.name);
         this.dialogRef.close(res);
       }
     });

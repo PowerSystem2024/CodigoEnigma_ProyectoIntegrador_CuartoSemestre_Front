@@ -20,8 +20,8 @@
       <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
     </nb-action>
 
-    <!-- Botón: Registro -->
-    <nb-action>
+    <!-- Botón: Registro (SOLO para usuarios NO logueados) -->
+    <nb-action *ngIf="!isLoggedIn">
       <button nbButton ghost size="small"
               (click)="openRegisterDialog()"
               title="Crear una nueva cuenta"
@@ -31,14 +31,28 @@
       </button>
     </nb-action>
 
-    <!-- Botón: Login -->
-    <nb-action>
+    <!-- Botón: Login (SOLO para usuarios NO logueados) -->
+    <nb-action *ngIf="!isLoggedIn">
       <button nbButton ghost size="small"
               (click)="openLoginDialog()"
               title="Iniciar sesión"
               aria-label="Iniciar sesión">
         <nb-icon icon="log-in-outline"></nb-icon>
         <span class="button-text">Iniciar Sesión</span>
+      </button>
+    </nb-action>
+
+    <!-- Usuario logueado (SOLO cuando isLoggedIn = true) -->
+    <nb-action *ngIf="isLoggedIn">
+      <button nbButton
+              ghost
+              size="small"
+              [nbPopover]="userMenuTemplate"
+              nbPopoverPlacement="bottom"
+              title="Mi cuenta"
+              aria-label="Menú de usuario">
+        <nb-icon icon="person-outline" aria-hidden="true"></nb-icon>
+        <span class="button-text">{{ currentUser?.name || 'Usuario' }}</span>
       </button>
     </nb-action>
 
@@ -55,16 +69,32 @@
     <ng-template #cart>
       <app-cart></app-cart>
     </ng-template>
-
-    <!-- Menú de usuario -->
-    <nb-action icon="person-outline"
-               [nbPopover]="user"
-               nbPopoverPlacement="bottom"
-               title="Usuario">
-    </nb-action>
-
-    <ng-template #user>
-      <nb-menu [items]="userMenu"></nb-menu>
-    </ng-template>
   </nb-actions>
 </div>
+
+<!-- Menú para usuario logueado - VERSIÓN FINAL -->
+<ng-template #userMenuTemplate>
+  <div class="custom-user-menu">
+    <div class="menu-item" (click)="openProfile()">
+      <nb-icon icon="person-outline"></nb-icon>
+      <span>Perfil</span>
+    </div>
+
+    <div class="menu-item" (click)="openOrders()">
+      <nb-icon icon="shopping-bag-outline"></nb-icon>
+      <span>Mis Pedidos</span>
+    </div>
+
+    <div class="menu-item" (click)="openSettings()">
+      <nb-icon icon="settings-2-outline"></nb-icon>
+      <span>Ajustes</span>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-item logout-item" (click)="openLogoutDialog()">
+      <nb-icon icon="log-out-outline"></nb-icon>
+      <span>Cerrar Sesión</span>
+    </div>
+  </div>
+</ng-template>

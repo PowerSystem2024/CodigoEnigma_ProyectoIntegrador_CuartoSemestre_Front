@@ -12,7 +12,8 @@ import {
 } from '@nebular/theme';
 import { AuthService } from '../../services/auth.service';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
-import { catchError, finalize, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 interface LoginResponse {
   token: string;
@@ -37,7 +38,6 @@ interface LoginResponse {
     NbIconModule
   ]
 })
-
 export class LoginDialogComponent {
   loginForm: FormGroup;
   loading = false;
@@ -56,35 +56,37 @@ export class LoginDialogComponent {
     });
   }
 
-onSubmit(): void {
-  this.markFormGroupTouched();
+  onSubmit(): void {
+    this.markFormGroupTouched();
 
-  if (this.loginForm.invalid) {
-    this.error = 'Por favor completa todos los campos correctamente';
-    return;
-  }
-
-  this.loading = true;
-  this.error = null;
-
-  // Uso del AuthService
-  this.authService
-    .login(this.loginForm.value)
-    .pipe(
-    catchError(err => {
-      console.error('Error en login:', err);
-      this.error = err?.error?.message || 'Credenciales incorrectas. Intenta nuevamente.';
-      return of(null);
-    }),
-    finalize(() => this.loading = false)
-  ).subscribe((res: LoginResponse | null) => {
-    if (res) {
-      localStorage.setItem('userid', res.token);
-      this.toastrService.success('Login exitoso', '¡Bienvenido de nuevo!');
-      this.dialogRef.close(res);
+    if (this.loginForm.invalid) {
+      this.error = 'Por favor completa todos los campos correctamente';
+      return;
     }
-  });
-}
+
+    this.loading = true;
+    this.error = null;
+
+    // Uso del AuthService
+    this.authService.login(this.loginForm.value).pipe(
+      catchError(err => {
+        console.error('Error en login:', err);
+        this.error = err?.error?.message || 'Credenciales incorrectas. Intenta nuevamente.';
+        return of(null);
+      }),
+      finalize(() => this.loading = false)
+    ).subscribe((res: LoginResponse | null) => {
+      if (res) {
+        // ✅ GUARDAR USUARIO EN LOCALSTORAGE PARA MOSTRAR EN HEADER
+        localStorage.setItem('currentUser', JSON.stringify(res.user));
+        localStorage.setItem('userid', res.token);
+
+        this.toastrService.success('Login exitoso', `¡Bienvenido de nuevo, ${res.user.name}!`);
+        console.log('✅ Usuario logueado:', res.user.name);
+        this.dialogRef.close(res);
+      }
+    });
+  }
 
   onCancel(): void {
     this.dialogRef.close();
@@ -99,7 +101,6 @@ onSubmit(): void {
   }
 
   openForgotPassword(): void {
-    // Implementar diálogo de recuperación de contraseña
     this.toastrService.warning('Recuperación de contraseña en desarrollo', 'Esta funcionalidad estará disponible pronto');
   }
 
