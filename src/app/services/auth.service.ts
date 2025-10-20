@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 export interface RegisterPayload {
   name: string;
@@ -18,6 +18,20 @@ export interface RegisterResponse {
   };
 }
 
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,8 +40,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-
-  // ✅ VERSIÓN MOCK PARA TESTING
+  // ✅ VERSIÓN MOCK PARA TESTING - REGISTER
   register(payload: RegisterPayload): Observable<RegisterResponse> {
     // Simula éxito
     return of({
@@ -62,10 +75,32 @@ export class AuthService {
     */
   }
 
+  // ✅ VERSIÓN MOCK PARA TESTING - LOGIN
+  login(payload: LoginPayload): Observable<LoginResponse> {
+    console.log('📤 Enviando login:', payload);
+
+    // Mock simple - igual que el registro
+    return of({
+      token: `fake-jwt-token-login-${Date.now()}`,
+      user: {
+        id: Math.floor(Math.random() * 1000),
+        name: 'Usuario Logeado',
+        email: payload.email
+      }
+    }).pipe(delay(1000));
+
+    // Para backend real (futuro):
+    // return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, payload);
+  }
+
   // ✅ VERSIÓN REAL (cuando tengas backend)
   /*
   register(userData: RegisterPayload): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/auth/register`, userData);
+  }
+
+  login(userData: LoginPayload): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, userData);
   }
   */
 }

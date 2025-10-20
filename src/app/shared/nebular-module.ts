@@ -16,6 +16,15 @@ import {
   NbIconModule,
   NbSearchModule,
   NbContextMenuModule, // Menús contextuales
+  NbBadgeModule,
+  NbSpinnerModule,
+  NbToggleComponent,
+  NbCheckboxModule,
+  NbSelectModule,
+  NbTooltipModule,
+  NbAccordionModule,
+  NbAlertModule,
+  NbToggleModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -38,6 +47,14 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbSearchModule,
     NbContextMenuModule,
     NbEvaIconsModule,
+    NbBadgeModule,
+    NbSpinnerModule,
+    NbToggleModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    NbTooltipModule,
+    NbAccordionModule,
+    NbAlertModule,
   ],
   exports: [
     CommonModule,
@@ -56,6 +73,14 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbSearchModule,
     NbContextMenuModule,
     NbEvaIconsModule,
+    NbBadgeModule,
+    NbSpinnerModule,
+    NbToggleModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    NbTooltipModule,
+    NbAccordionModule,
+    NbAlertModule,
   ]
 })
 export class NebularModule {}

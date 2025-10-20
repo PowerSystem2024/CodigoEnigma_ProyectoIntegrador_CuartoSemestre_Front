@@ -1,49 +1,68 @@
 <div class="left">
   <a href="/" class="logo-container">
-    <img src="assets/images/logo.png" alt="logo" class="logo"/>
+    <img src="assets/images/logo.png" alt="logo" class="logo" />
     <span class="title">Mi App</span>
   </a>
 </div>
 
 <div class="center">
   <nb-actions size="medium">
-    <nb-action>
-      <a href="/">Home</a>
-    </nb-action>
-    <nb-action>
-      <a href="/products">Catalogo</a>
-    </nb-action>
-    <nb-action>
-      <a href="/my-order">My Order</a>
-    </nb-action>
+    <nb-action><a href="/">Home</a></nb-action>
+    <nb-action><a href="/products">Catálogo</a></nb-action>
+    <nb-action><a href="/my-order">Mis Pedidos</a></nb-action>
   </nb-actions>
 </div>
 
 <div class="right">
-  <nb-actions size="medium">
+  <nb-actions size="medium" class="actions-right">
+    <!-- Buscador -->
     <nb-action>
       <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
     </nb-action>
 
-  <!-- BOTÓN DE REGISTRO - AGREGADO -->
+    <!-- Botón: Registro -->
     <nb-action>
-      <button nbButton
-              ghost
-              size="small"
+      <button nbButton ghost size="small"
               (click)="openRegisterDialog()"
               title="Crear una nueva cuenta"
               aria-label="Crear una nueva cuenta">
-        <nb-icon icon="person-add-outline" aria-hidden="true"></nb-icon>
+        <nb-icon icon="person-add-outline"></nb-icon>
         <span class="button-text">Registrarse</span>
       </button>
     </nb-action>
 
-    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" badgeText="12"
-               badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
+    <!-- Botón: Login -->
+    <nb-action>
+      <button nbButton ghost size="small"
+              (click)="openLoginDialog()"
+              title="Iniciar sesión"
+              aria-label="Iniciar sesión">
+        <nb-icon icon="log-in-outline"></nb-icon>
+        <span class="button-text">Iniciar Sesión</span>
+      </button>
+    </nb-action>
+
+    <!-- Carrito -->
+    <nb-action icon="shopping-cart-outline"
+               [nbPopover]="cart"
+               nbPopoverPlacement="bottom"
+               badgeText="12"
+               badgePosition="bottom right"
+               badgeStatus="info"
+               title="Carrito">
+    </nb-action>
+
     <ng-template #cart>
       <app-cart></app-cart>
     </ng-template>
-    <nb-action icon="person-outline" [nbPopover]="user" nbPopoverPlacement="bottom" title="User"></nb-action>
+
+    <!-- Menú de usuario -->
+    <nb-action icon="person-outline"
+               [nbPopover]="user"
+               nbPopoverPlacement="bottom"
+               title="Usuario">
+    </nb-action>
+
     <ng-template #user>
       <nb-menu [items]="userMenu"></nb-menu>
     </ng-template>
