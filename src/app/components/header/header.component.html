@@ -14,7 +14,7 @@
       <a href="/products">Catalogo</a>
     </nb-action>
     <nb-action> 
-      <a href="/my-order">My Order</a>
+      <a href="/my-orders">Mis Ordenes</a>
     </nb-action>
   </nb-actions>
 </div>
@@ -24,10 +24,10 @@
     <nb-action>
       <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
     </nb-action>
-    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" badgeText="12"
+    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" [badgeText]="getTotalItems()"
                badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
     <ng-template #cart>
-      <app-cart></app-cart>
+      <app-cart [order]="activeOrder" [parentClass]="'header-cart'"></app-cart>
     </ng-template>
     <nb-action icon="person-outline" [nbPopover]="user" nbPopoverPlacement="bottom" title="User"></nb-action>
     <ng-template #user>

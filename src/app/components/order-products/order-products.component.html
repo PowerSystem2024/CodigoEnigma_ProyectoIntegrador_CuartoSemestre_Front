@@ -1,0 +1,32 @@
+<nb-list>
+  <nb-list-item class="product-list-container" style="font-size: 18px;">
+    <div>Producto</div>
+    <div></div>
+    <div>Cantidad</div>
+    <div>Total</div>
+  </nb-list-item>
+  <nb-list-item class="product-list-container" *ngFor="let product of products">
+    <div class="product-item-container">
+      <img [src]="product.image_url" alt="{{ product.name }}" class="product-image" (click)="goToProductDetail(product.id)"/>
+      <div class="product-info-container" (click)="goToProductDetail(product.id)">
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-price">{{ product.price | currency }}</div>
+      </div>
+      <div class="product-quantity" *ngIf="!active">x{{ product.quantity }}</div>
+      <div class="product-quantity" *ngIf="active">
+        <nb-button-group status="control">
+          <button nbButton (click)="changeAmount(-1, product)">-</button>
+          <button nbButton style="font-size: 18px;">{{product.quantity}}</button>
+          <button nbButton (click)="changeAmount(1, product)">+</button>
+        </nb-button-group>
+      </div>
+      <div class="product-total-price">
+        {{ ((product.quantity || 1) * product.price) | currency }}
+        <button *ngIf="active" status="danger" nbButton (click)="removeProduct(product.id)"><nb-icon icon="trash-2"></nb-icon></button>
+      </div>
+    </div>
+  </nb-list-item>
+  <nb-list-item style="font-size: 18px; justify-content: flex-end">
+    <div>Total: {{getTotal() | currency}}</div>
+  </nb-list-item>
+</nb-list>
