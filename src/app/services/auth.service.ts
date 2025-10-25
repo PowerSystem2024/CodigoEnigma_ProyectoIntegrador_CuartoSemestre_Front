@@ -40,67 +40,53 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ VERSIÓN MOCK PARA TESTING - REGISTER
+  // REGISTER - Usa el nombre real del payload
   register(payload: RegisterPayload): Observable<RegisterResponse> {
-    // Simula éxito
+    console.log('📝 Registrando usuario:', payload);
+
     return of({
       token: 'fake-jwt-token-' + Date.now(),
       user: {
-        id: Math.floor(Math.random() * 1000), // ID aleatorio
-        name: payload.name,
+        id: Math.floor(Math.random() * 1000),
+        name: payload.name, // ✅ USA EL NOMBRE REAL DEL FORMULARIO
         email: payload.email
       }
     }).pipe(delay(800));
-
-    // Para simular error (descomenta para probar):
-    /*
-    return of({
-      token: '',
-      user: {
-        id: 0,
-        name: '',
-        email: ''
-      }
-    }).pipe(
-      delay(800),
-      // Simular error
-      map(() => {
-        throw {
-          error: {
-            message: 'El usuario ya existe'
-          }
-        };
-      })
-    );
-    */
   }
 
-  // ✅ VERSIÓN MOCK PARA TESTING - LOGIN
+  // LOGIN CORREGIDO
   login(payload: LoginPayload): Observable<LoginResponse> {
     console.log('📤 Enviando login:', payload);
 
-    // Mock simple - igual que el registro
-    return of({
-      token: `fake-jwt-token-login-${Date.now()}`,
-      user: {
-        id: Math.floor(Math.random() * 1000),
-        name: 'Usuario Logeado',
-        email: payload.email
-      }
-    }).pipe(delay(1000));
+    // SIMULAR USUARIOS EXISTENTES CON NOMBRES REALES
+    const mockUsers = [
+      { email: 'lupita@prueba.com', name: 'Lupita González', id: 1 },
+      { email: 'juan@prueba.com', name: 'Juan Pérez', id: 2 },
+      { email: 'maria@prueba.com', name: 'María Rodríguez', id: 3 }
+    ];
 
-    // Para backend real (futuro):
-    // return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, payload);
-  }
+    const foundUser = mockUsers.find(user => user.email === payload.email);
 
-  // ✅ VERSIÓN REAL (cuando tengas backend)
-  /*
-  register(userData: RegisterPayload): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl}/auth/register`, userData);
+    if (foundUser) {
+      // USUARIO EXISTENTE - Retorna nombre real
+      return of({
+        token: `fake-jwt-token-${foundUser.id}`,
+        user: {
+          id: foundUser.id,
+          name: foundUser.name,
+          email: foundUser.email
+        }
+      }).pipe(delay(800));
+    } else {
+      // NUEVO USUARIO - Usa el email como nombre temporal
+      return of({
+        token: `fake-jwt-token-new-${Date.now()}`,
+        user: {
+          id: Math.floor(Math.random() * 1000),
+          name: payload.email.split('@')[0],
+          email: payload.email
+        }
+      }).pipe(delay(800));
+    }
   }
-
-  login(userData: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, userData);
-  }
-  */
 }

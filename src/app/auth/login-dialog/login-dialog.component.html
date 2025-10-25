@@ -39,7 +39,7 @@
         </small>
       </div>
 
-      <!-- Campo Contraseña - ESTRUCTURA IDÉNTICA al register -->
+      <!-- Campo Contraseña -->
       <div class="form-field">
         <label for="login-password" class="field-label">
           <nb-icon icon="lock-outline" aria-hidden="true"></nb-icon>
@@ -73,13 +73,13 @@
         </a>
       </div>
 
-      <!-- Mensaje de error general - IDÉNTICO al register -->
+      <!-- Mensaje de error general -->
       <div *ngIf="error" class="alert alert-danger" role="alert" aria-live="polite">
         <nb-icon icon="alert-circle-outline" aria-hidden="true"></nb-icon>
         {{ error }}
       </div>
 
-      <!-- Botones de acción - ESTRUCTURA IDÉNTICA al register -->
+      <!-- Botones de acción -->
       <div class="button-group">
         <button
           nbButton
@@ -107,7 +107,7 @@
         </button>
       </div>
 
-      <!-- Contenedor para errores de formulario (accesibilidad) - IDÉNTICO al register -->
+      <!-- Contenedor para errores de formulario (accesibilidad) -->
       <div id="form-errors" class="sr-only" aria-live="polite">
         <span *ngIf="loginForm.invalid">El formulario contiene errores. Por favor revisa los campos.</span>
       </div>
@@ -115,7 +115,7 @@
     </form>
   </nb-card-body>
 
-  <!-- Sección de registro - ESTRUCTURA SIMILAR al register -->
+  <!-- Sección de registro -->
   <nb-card-footer>
     <div class="auth-footer">
       <p class="auth-link-text">
@@ -132,7 +132,7 @@
   </nb-card-footer>
 </nb-card>
 
-<!-- Anuncios para lectores de pantalla - IDÉNTICO al register -->
+<!-- Anuncios para lectores de pantalla -->
 <div aria-live="polite" aria-atomic="true" class="sr-only">
   <span *ngIf="loading">Iniciando sesión, por favor espere...</span>
   <span *ngIf="error">Error al iniciar sesión: {{ error }}</span>

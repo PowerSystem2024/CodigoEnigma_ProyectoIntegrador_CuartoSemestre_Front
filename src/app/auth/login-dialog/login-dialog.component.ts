@@ -67,32 +67,38 @@ export class LoginDialogComponent {
     this.loading = true;
     this.error = null;
 
+    console.log('📤 Enviando credenciales de login...');
+
     // Uso del AuthService
     this.authService.login(this.loginForm.value).pipe(
       catchError(err => {
-        console.error('Error en login:', err);
+        console.error('❌ Error en login:', err);
         this.error = err?.error?.message || 'Credenciales incorrectas. Intenta nuevamente.';
         return of(null);
       }),
       finalize(() => this.loading = false)
     ).subscribe((res: LoginResponse | null) => {
       if (res) {
-        // ✅ GUARDAR USUARIO EN LOCALSTORAGE PARA MOSTRAR EN HEADER
+        console.log('✅ Respuesta del login recibida:', res);
+
+        // GUARDAR USUARIO EN LOCALSTORAGE PARA MOSTRAR EN HEADER
         localStorage.setItem('currentUser', JSON.stringify(res.user));
         localStorage.setItem('userid', res.token);
 
         this.toastrService.success('Login exitoso', `¡Bienvenido de nuevo, ${res.user.name}!`);
-        console.log('✅ Usuario logueado:', res.user.name);
+        console.log('✅ Usuario logueado:', res.user.name); // ✅ CORREGIDO: "logueado"
         this.dialogRef.close(res);
       }
     });
   }
 
   onCancel(): void {
+    console.log('❌ Login cancelado por el usuario');
     this.dialogRef.close();
   }
 
   openRegister(): void {
+    console.log('🔄 Cerrando login y abriendo registro...');
     this.dialogRef.close();
     this.dialogService.open(RegisterDialogComponent, {
       closeOnEsc: true,
@@ -101,6 +107,7 @@ export class LoginDialogComponent {
   }
 
   openForgotPassword(): void {
+    console.log('🔒 Solicitando recuperación de contraseña...');
     this.toastrService.warning('Recuperación de contraseña en desarrollo', 'Esta funcionalidad estará disponible pronto');
   }
 

@@ -31,11 +31,13 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('🚀 HeaderComponent inicializado');
     this.checkAuthStatus();
     this.setupAuthListener();
 
     // Escuchar cambios en el localStorage entre pestañas
     window.addEventListener('storage', (event) => {
+      console.log('🔄 Evento storage detectado:', event.key);
       if (event.key === 'currentUser') {
         this.checkAuthStatus();
       }
@@ -45,12 +47,21 @@ export class HeaderComponent implements OnInit {
   // Verificar si hay usuario logueado
   private checkAuthStatus(): void {
     const userData = localStorage.getItem('currentUser');
+    console.log('📦 Datos en localStorage (currentUser):', userData);
+
     if (userData) {
-      this.currentUser = JSON.parse(userData);
-      this.isLoggedIn = true;
+      try {
+        this.currentUser = JSON.parse(userData);
+        this.isLoggedIn = true;
+        console.log('🔍 Usuario parseado correctamente:', this.currentUser);
+        console.log('👤 Nombre del usuario:', this.currentUser?.name);
+      } catch (error) {
+        console.error('❌ Error al parsear usuario:', error);
+      }
     } else {
       this.currentUser = null;
       this.isLoggedIn = false;
+      console.log('❌ No hay usuario logueado en localStorage');
     }
   }
 
@@ -77,20 +88,43 @@ export class HeaderComponent implements OnInit {
   }
 
   // Método para abrir diálogo de registro
-  openRegisterDialog() {
-    this.dialogService.open(RegisterDialogComponent, {
-      closeOnEsc: true,
-      autoFocus: true,
-      hasBackdrop: true,
+// En header.component.ts - modifica SOLO el método openRegisterDialog()
+openRegisterDialog() {
+  const registerRef = this.dialogService.open(RegisterDialogComponent, {
+    closeOnEsc: true,
+    autoFocus: true,
+    hasBackdrop: true,
+  });
+
+  // Actualizar el header cuando se cierra el registro
+  registerRef.onClose.subscribe((result: any) => {
+    console.log('📨 Resultado del registro:', result);
+
+      if (result?.registered) {
+        console.log('✅ Registro exitoso - Abriendo login...');
+
+        // Abrir automáticamente el login después del registro exitoso
+        setTimeout(() => {
+          this.openLoginDialog();
+        }, 500);
+      }
     });
   }
 
   // Método para abrir diálogo de login
   openLoginDialog(): void {
-    this.dialogService.open(LoginDialogComponent, {
+    const loginRef = this.dialogService.open(LoginDialogComponent, {
       closeOnEsc: true,
       autoFocus: true,
       hasBackdrop: true,
+    });
+
+    // Actualizar el header cuando se cierra el login
+    loginRef.onClose.subscribe((result: any) => {
+      if (result) {
+        console.log('🔄 Actualizando header después del login...');
+        this.checkAuthStatus(); // ← Esto actualizará el header con el nombre del usuario
+      }
     });
   }
 
