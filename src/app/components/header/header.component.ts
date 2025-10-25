@@ -6,6 +6,7 @@ import { NebularModule } from '../../shared/nebular-module';
 import { RegisterDialogComponent } from '../../auth/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { LogoutDialogComponent } from '../../auth/logout-dialog/logout-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -20,15 +21,16 @@ import { LogoutDialogComponent } from '../../auth/logout-dialog/logout-dialog.co
     ]
 })
 export class HeaderComponent implements OnInit {
-
   currentUser: any = null;
   isLoggedIn = false;
 
   constructor(
     private dialogService: NbDialogService,
     private menuService: NbMenuService,
-    private searchService: NbSearchService
+    private searchService: NbSearchService,
+    private router: Router
   ) {}
+
 
   ngOnInit(): void {
     console.log('🚀 HeaderComponent inicializado');
@@ -88,17 +90,17 @@ export class HeaderComponent implements OnInit {
   }
 
   // Método para abrir diálogo de registro
-// En header.component.ts - modifica SOLO el método openRegisterDialog()
-openRegisterDialog() {
-  const registerRef = this.dialogService.open(RegisterDialogComponent, {
-    closeOnEsc: true,
-    autoFocus: true,
-    hasBackdrop: true,
-  });
+  // En header.component.ts - modifica SOLO el método openRegisterDialog()
+  openRegisterDialog() {
+    const registerRef = this.dialogService.open(RegisterDialogComponent, {
+      closeOnEsc: true,
+      autoFocus: true,
+      hasBackdrop: true,
+    });
 
-  // Actualizar el header cuando se cierra el registro
-  registerRef.onClose.subscribe((result: any) => {
-    console.log('📨 Resultado del registro:', result);
+    // Actualizar el header cuando se cierra el registro
+    registerRef.onClose.subscribe((result: any) => {
+      console.log('📨 Resultado del registro:', result);
 
       if (result?.registered) {
         console.log('✅ Registro exitoso - Abriendo login...');
@@ -145,23 +147,6 @@ openRegisterDialog() {
     });
   }
 
-  // Métodos para el menú personalizado
-  openProfile(): void {
-    console.log('Abrir perfil');
-    // Redirigir o abrir diálogo de perfil
-    window.location.href = '/profile';
-  }
-
-  openOrders(): void {
-    console.log('Abrir pedidos');
-    window.location.href = '/orders';
-  }
-
-  openSettings(): void {
-    console.log('Abrir ajustes');
-    window.location.href = '/settings';
-  }
-
   // Realizar el logout
   private performLogout(): void {
     localStorage.removeItem('currentUser');
@@ -172,5 +157,9 @@ openRegisterDialog() {
 
     // Redirigir al home
     window.location.href = '/';
+  }
+
+  goToOrders(): void {
+    this.router.navigate(['/my-order']);
   }
 }
