@@ -1,0 +1,139 @@
+<nb-card class="login-card">
+  <nb-card-header>
+    <div class="header-content">
+      <h5>Iniciar Sesión</h5>
+      <button nbButton
+              ghost
+              size="small"
+              (click)="onCancel()"
+              class="close-button"
+              title="Cerrar diálogo de inicio de sesión"
+              aria-label="Cerrar diálogo de inicio de sesión">
+        <nb-icon icon="close-outline" aria-hidden="true"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+      <!-- Campo Email  -->
+      <div class="form-field">
+        <label for="login-email" class="field-label">
+          <nb-icon icon="email-outline" aria-hidden="true"></nb-icon>
+          Email
+        </label>
+        <input
+          nbInput
+          id="login-email"
+          type="email"
+          fullWidth
+          formControlName="email"
+          placeholder="tu@email.com"
+          [status]="email?.invalid && email?.touched ? 'danger' : 'basic'"
+          aria-describedby="login-email-error"
+        >
+        <small id="login-email-error" class="text-danger" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="email?.errors?.['email']">Email inválido</span>
+        </small>
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-field">
+        <label for="login-password" class="field-label">
+          <nb-icon icon="lock-outline" aria-hidden="true"></nb-icon>
+          Contraseña
+        </label>
+        <input
+          nbInput
+          id="login-password"
+          type="password"
+          fullWidth
+          formControlName="password"
+          placeholder="Tu contraseña"
+          [status]="password?.invalid && password?.touched ? 'danger' : 'basic'"
+          aria-describedby="login-password-error"
+        >
+        <small id="login-password-error" class="text-danger" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
+          <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres</span>
+        </small>
+      </div>
+
+      <!-- Enlace "Olvidaste tu contraseña?"-->
+      <div class="forgot-password-link">
+        <a href="#"
+           class="link-text"
+           (click)="$event.preventDefault(); openForgotPassword()"
+           title="Recuperar contraseña"
+           aria-label="Recuperar contraseña">
+          <nb-icon icon="question-mark-circle-outline" aria-hidden="true"></nb-icon>
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+
+      <!-- Mensaje de error general -->
+      <div *ngIf="error" class="alert alert-danger" role="alert" aria-live="polite">
+        <nb-icon icon="alert-circle-outline" aria-hidden="true"></nb-icon>
+        {{ error }}
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="button-group">
+        <button
+          nbButton
+          fullWidth
+          status="primary"
+          type="submit"
+          [disabled]="loginForm.invalid || loading"
+          [attr.aria-busy]="loading"
+          class="submit-button"
+        >
+          <nb-icon *ngIf="loading" icon="loader-outline" aria-hidden="true"></nb-icon>
+          {{ loading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
+        </button>
+
+        <button
+          nbButton
+          fullWidth
+          status="basic"
+          type="button"
+          (click)="onCancel()"
+          [disabled]="loading"
+          class="cancel-button"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <!-- Contenedor para errores de formulario (accesibilidad) -->
+      <div id="form-errors" class="sr-only" aria-live="polite">
+        <span *ngIf="loginForm.invalid">El formulario contiene errores. Por favor revisa los campos.</span>
+      </div>
+
+    </form>
+  </nb-card-body>
+
+  <!-- Sección de registro -->
+  <nb-card-footer>
+    <div class="auth-footer">
+      <p class="auth-link-text">
+        ¿No tenés cuenta?
+        <a href="#"
+           class="auth-link"
+           (click)="$event.preventDefault(); openRegister()"
+           title="Crear una nueva cuenta"
+           aria-label="Crear una nueva cuenta">
+          Registrate aquí
+        </a>
+      </p>
+    </div>
+  </nb-card-footer>
+</nb-card>
+
+<!-- Anuncios para lectores de pantalla -->
+<div aria-live="polite" aria-atomic="true" class="sr-only">
+  <span *ngIf="loading">Iniciando sesión, por favor espere...</span>
+  <span *ngIf="error">Error al iniciar sesión: {{ error }}</span>
+</div>

@@ -1,0 +1,148 @@
+<nb-card class="register-card">
+  <nb-card-header>
+    <div class="header-content">
+      <h5>Crear Cuenta</h5>
+      <button nbButton
+              ghost
+              size="small"
+              (click)="onCancel()"
+              class="close-button"
+              title="Cerrar diálogo de registro"
+              aria-label="Cerrar diálogo de registro">
+        <nb-icon icon="close-outline" aria-hidden="true"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+
+      <!-- Campo Nombre -->
+      <div class="form-group">
+        <label for="name" class="label">
+          <nb-icon icon="person-outline" aria-hidden="true"></nb-icon>
+          Nombre completo
+        </label>
+        <input
+          nbInput
+          fullWidth
+          id="name"
+          formControlName="name"
+          placeholder="Ingresa tu nombre completo"
+          [status]="name?.invalid && name?.touched ? 'danger' : 'basic'"
+          aria-describedby="name-error"
+        >
+        <small id="name-error" class="text-danger" *ngIf="name?.invalid && name?.touched">
+          <span *ngIf="name?.errors?.['required']">El nombre es requerido</span>
+          <span *ngIf="name?.errors?.['minlength']">Mínimo 2 caracteres</span>
+        </small>
+      </div>
+
+      <!-- Campo Email -->
+      <div class="form-group">
+        <label for="email" class="label">
+          <nb-icon icon="email-outline" aria-hidden="true"></nb-icon>
+          Email
+        </label>
+        <input
+          nbInput
+          fullWidth
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@email.com"
+          [status]="email?.invalid && email?.touched ? 'danger' : 'basic'"
+          aria-describedby="email-error"
+        >
+        <small id="email-error" class="text-danger" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="email?.errors?.['email']">Email inválido</span>
+        </small>
+      </div>
+
+      <!-- Campo Contraseña -->
+      <div class="form-group">
+        <label for="password" class="label">
+          <nb-icon icon="lock-outline" aria-hidden="true"></nb-icon>
+          Contraseña
+        </label>
+        <input
+          nbInput
+          fullWidth
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Mínimo 6 caracteres"
+          [status]="password?.invalid && password?.touched ? 'danger' : 'basic'"
+          aria-describedby="password-error"
+        >
+        <small id="password-error" class="text-danger" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">La contraseña es requerida</span>
+          <span *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres</span>
+        </small>
+      </div>
+
+      <!-- Campo Confirmar Contraseña -->
+      <div class="form-group">
+        <label for="confirmPassword" class="label">
+          <nb-icon icon="lock-outline" aria-hidden="true"></nb-icon>
+          Confirmar Contraseña
+        </label>
+        <input
+          nbInput
+          fullWidth
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Repite tu contraseña"
+          [status]="confirmPassword?.invalid && confirmPassword?.touched ? 'danger' : 'basic'"
+          aria-describedby="confirm-password-error"
+        >
+        <small id="confirm-password-error" class="text-danger" *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+          <span *ngIf="confirmPassword?.errors?.['required']">Confirma tu contraseña</span>
+          <span *ngIf="confirmPassword?.errors?.['passwordMismatch']">Las contraseñas no coinciden</span>
+        </small>
+      </div>
+
+      <!-- Mensaje de error general -->
+      <div *ngIf="error" class="alert alert-danger" role="alert" aria-live="polite">
+        <nb-icon icon="alert-circle-outline" aria-hidden="true"></nb-icon>
+        {{ error }}
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="button-group">
+        <button
+          nbButton
+          fullWidth
+          status="primary"
+          type="submit"
+          [disabled]="registerForm.invalid || loading"
+          [attr.aria-busy]="loading"
+          class="submit-button"
+        >
+          <nb-icon *ngIf="loading" icon="loader-outline" aria-hidden="true"></nb-icon>
+          {{ loading ? 'Registrando...' : 'Crear Cuenta' }}
+        </button>
+
+        <button
+          nbButton
+          fullWidth
+          status="basic"
+          type="button"
+          (click)="onCancel()"
+          [disabled]="loading"
+          class="cancel-button"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <!-- Contenedor para errores de formulario (accesibilidad) -->
+      <div id="form-errors" class="sr-only" aria-live="polite">
+        <span *ngIf="registerForm.invalid">El formulario contiene errores. Por favor revisa los campos.</span>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>
