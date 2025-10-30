@@ -1,4 +1,4 @@
-import { NbMenuService, NbSearchService, NbDialogService, NbDialogRef, NbPopoverModule } from '@nebular/theme';
+import { NbMenuService, NbDialogService, NbDialogRef, NbPopoverModule } from '@nebular/theme';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
@@ -7,6 +7,9 @@ import { RegisterDialogComponent } from '../../auth/register-dialog/register-dia
 import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { LogoutDialogComponent } from '../../auth/logout-dialog/logout-dialog.component';
 import { Router } from '@angular/router';
+// import { SearchService } from '../../services/search.service';
+import { FiltersService, ProductFilters, Modo } from '../../services/filters.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-header',
@@ -17,18 +20,25 @@ import { Router } from '@angular/router';
       CommonModule,
       CartComponent,
       NebularModule,
-      NbPopoverModule
+      NbPopoverModule,
+      FormsModule
     ]
 })
 export class HeaderComponent implements OnInit {
   currentUser: any = null;
   isLoggedIn = false;
+  // UI state for filters popover (simplified: search, min/max price, size)
+  searchQuery: string = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  size: string | null = null;
 
   constructor(
     private dialogService: NbDialogService,
     private menuService: NbMenuService,
-    private searchService: NbSearchService,
-    private router: Router
+    private router: Router,
+    // private globalSearchService: SearchService,
+    private filtersService: FiltersService
   ) {}
 
 
@@ -36,6 +46,15 @@ export class HeaderComponent implements OnInit {
     console.log('🚀 HeaderComponent inicializado');
     this.checkAuthStatus();
     this.setupAuthListener();
+
+    // Inicializar valores del popover con filtros actuales
+    const f = this.filtersService.current;
+    this.searchQuery = f.search_query || '';
+    this.minPrice = f.min_price ?? null;
+    this.maxPrice = f.max_price ?? null;
+    this.size = f.size ?? null;
+
+    // Eliminamos overlay de búsqueda; ahora el ícono abre el popover con filtros
 
     // Escuchar cambios en el localStorage entre pestañas
     window.addEventListener('storage', (event) => {
@@ -161,5 +180,25 @@ export class HeaderComponent implements OnInit {
 
   goToOrders(): void {
     this.router.navigate(['/my-order']);
+  }
+
+  applyFiltersFromHeader(): void {
+    const payload: Partial<ProductFilters> = {
+      search_query: this.searchQuery || '',
+      min_price: this.minPrice ?? null,
+      max_price: this.maxPrice ?? null,
+      size: this.size ?? null,
+    };
+    this.filtersService.setFilters(payload);
+    this.router.navigate(['/products']);
+  }
+
+  clearHeaderFilters(): void {
+    this.searchQuery = '';
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.size = null;
+    this.filtersService.reset();
+    this.router.navigate(['/products']);
   }
 }

@@ -13,10 +13,10 @@ export class ProductItemComponent {
   @Input() product!: Product;
 
   ngOnInit() {
-    console.log(this.product);
+    console.log('🌿 Producto renderizado:', this.product);
   }
 
   addToCart() {
-    console.log('Agregado:', this.product);
+    console.log('🛒 Agregado:', this.product);
   }
 }

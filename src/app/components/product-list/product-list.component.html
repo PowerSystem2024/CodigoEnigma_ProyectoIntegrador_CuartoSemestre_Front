@@ -1,4 +1,13 @@
+<div class="product-count" style="margin: 8px 0;">
+  📦 Mostrando {{ filteredProducts.length }} de {{ products.length }} productos
+  <small style="opacity:.7;">(usa los filtros del encabezado)</small>
+  
+</div>
+
 <div class="products-container">
-  <app-product-item class="product-item" *ngFor="let product of products" [product]="product">
+  <div *ngIf="filteredProducts.length === 0" class="no-products">
+    <p>No se encontraron productos.</p>
+  </div>
+  <app-product-item class="product-item" *ngFor="let product of filteredProducts" [product]="product">
   </app-product-item>
 </div>
