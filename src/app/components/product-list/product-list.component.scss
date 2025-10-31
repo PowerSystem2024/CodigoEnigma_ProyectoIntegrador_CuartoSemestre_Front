@@ -28,6 +28,43 @@
     color: #666;
 }
 
+.active-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 4px auto 10px;
+    max-width: 85rem;
+    padding: 0 1rem;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f5f6f8;
+    border: 1px solid #e2e5ea;
+    color: #333;
+    border-radius: 16px;
+    padding: 3px 8px;
+    font-size: 12px;
+}
+
+.chip button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 14px;
+    padding: 0 4px;
+    color: #777;
+}
+
+.chip button:hover {
+    color: #222;
+}
+
 .no-products {
     text-align: center;
     padding: 40px 20px;

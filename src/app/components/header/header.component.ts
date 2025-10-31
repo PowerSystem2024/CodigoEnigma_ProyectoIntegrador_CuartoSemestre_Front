@@ -1,6 +1,6 @@
 import { NbMenuService, NbDialogService, NbDialogRef, NbPopoverModule } from '@nebular/theme';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 import { NebularModule } from '../../shared/nebular-module';
 import { RegisterDialogComponent } from '../../auth/register-dialog/register-dialog.component';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 // import { SearchService } from '../../services/search.service';
 import { FiltersService, ProductFilters, Modo } from '../../services/filters.service';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -24,14 +25,15 @@ import { FormsModule } from '@angular/forms';
       FormsModule
     ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: any = null;
   isLoggedIn = false;
   // UI state for filters popover (simplified: search, min/max price, size)
   searchQuery: string = '';
   minPrice: number | null = null;
   maxPrice: number | null = null;
-  size: string | null = null;
+  selectedSizes: string[] = [];
+  private filtersSub: Subscription = new Subscription();
 
   constructor(
     private dialogService: NbDialogService,
@@ -52,7 +54,16 @@ export class HeaderComponent implements OnInit {
     this.searchQuery = f.search_query || '';
     this.minPrice = f.min_price ?? null;
     this.maxPrice = f.max_price ?? null;
-    this.size = f.size ?? null;
+    // Parsear size (puede ser comma-separated o null)
+    this.selectedSizes = f.size ? f.size.split(',').map(s => s.trim()) : [];
+
+    // Mantener el popover sincronizado si los filtros cambian desde otros lugares (p.ej. cerrar chips)
+    this.filtersSub = this.filtersService.filters$.subscribe(next => {
+      this.searchQuery = next.search_query || '';
+      this.minPrice = next.min_price ?? null;
+      this.maxPrice = next.max_price ?? null;
+      this.selectedSizes = next.size ? next.size.split(',').map(s => s.trim()) : [];
+    });
 
     // Eliminamos overlay de búsqueda; ahora el ícono abre el popover con filtros
 
@@ -63,6 +74,10 @@ export class HeaderComponent implements OnInit {
         this.checkAuthStatus();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.filtersSub.unsubscribe();
   }
 
   // Verificar si hay usuario logueado
@@ -187,7 +202,7 @@ export class HeaderComponent implements OnInit {
       search_query: this.searchQuery || '',
       min_price: this.minPrice ?? null,
       max_price: this.maxPrice ?? null,
-      size: this.size ?? null,
+      size: this.selectedSizes.length > 0 ? this.selectedSizes.join(',') : null,
     };
     this.filtersService.setFilters(payload);
     this.router.navigate(['/products']);
@@ -197,8 +212,26 @@ export class HeaderComponent implements OnInit {
     this.searchQuery = '';
     this.minPrice = null;
     this.maxPrice = null;
-    this.size = null;
+    this.selectedSizes = [];
     this.filtersService.reset();
     this.router.navigate(['/products']);
+  }
+
+  // Multi-size toggle helpers
+  toggleSize(size: string): void {
+    const idx = this.selectedSizes.indexOf(size);
+    if (idx > -1) {
+      this.selectedSizes.splice(idx, 1);
+    } else {
+      this.selectedSizes.push(size);
+    }
+  }
+
+  isSizeSelected(size: string): boolean {
+    return this.selectedSizes.includes(size);
+  }
+
+  clearSizes(): void {
+    this.selectedSizes = [];
   }
 }

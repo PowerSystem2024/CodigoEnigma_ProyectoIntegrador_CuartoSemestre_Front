@@ -16,7 +16,7 @@
 <div class="right">
   <nb-actions size="medium" class="actions-right">
     <!-- Buscador + Filtros (todo en el ícono de búsqueda) -->
-    <nb-action icon="search-outline" [nbPopover]="filtersTpl" nbPopoverPlacement="bottom">
+  <nb-action icon="search-outline" [nbPopover]="filtersTpl" nbPopoverPlacement="bottom" #filtersPopover="nbPopover">
     </nb-action>
     <ng-template #filtersTpl>
       <nb-card class="filters-popover" style="min-width: 280px">
@@ -29,18 +29,17 @@
             <input nbInput style="flex:1;" type="number" placeholder="Precio mín" [(ngModel)]="minPrice" />
             <input nbInput style="flex:1;" type="number" placeholder="Precio máx" [(ngModel)]="maxPrice" />
           </div>
-          <div class="filter-item" style="margin-bottom:8px;">
-            <nb-select fullWidth placeholder="Tamaño" [(selected)]="size" status="info">
-              <nb-option [value]="null">Todos</nb-option>
-              <nb-option value="Pequeño">Pequeño</nb-option>
-              <nb-option value="Mediano">Mediano</nb-option>
-              <nb-option value="Grande">Grande</nb-option>
-            </nb-select>
+          <div class="filter-item" style="margin-bottom:8px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+            <span style="min-width:60px;">Tamaño:</span>
+            <button nbButton size="tiny" [status]="selectedSizes.length === 0 ? 'primary' : 'basic'" (click)="$event.stopPropagation(); clearSizes()">Todos</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Chica') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Chica')">Chica</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Mediana') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Mediana')">Mediana</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Grande') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Grande')">Grande</button>
           </div>
         </nb-card-body>
         <nb-card-footer style="display:flex; gap:8px; justify-content:flex-end;">
           <button nbButton status="basic" size="small" (click)="clearHeaderFilters()">Limpiar</button>
-          <button nbButton status="primary" size="small" (click)="applyFiltersFromHeader()">Aplicar</button>
+          <button nbButton status="primary" size="small" (click)="applyFiltersFromHeader(); filtersPopover.hide()">Aplicar</button>
         </nb-card-footer>
       </nb-card>
     </ng-template>

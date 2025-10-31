@@ -4,6 +4,25 @@
   
 </div>
 
+<div class="active-filters" *ngIf="hasActiveFilters()">
+  <span class="chip" *ngIf="searchTerm">
+    Buscar: "{{ searchTerm }}"
+    <button type="button" (click)="clearFilter('search_query')" title="Quitar búsqueda" aria-label="Quitar búsqueda">×</button>
+  </span>
+  <span class="chip" *ngIf="minPrice !== null">
+    Mín: {{ minPrice }}
+    <button type="button" (click)="clearFilter('min_price')" title="Quitar precio mínimo" aria-label="Quitar precio mínimo">×</button>
+  </span>
+  <span class="chip" *ngIf="maxPrice !== null">
+    Máx: {{ maxPrice }}
+    <button type="button" (click)="clearFilter('max_price')" title="Quitar precio máximo" aria-label="Quitar precio máximo">×</button>
+  </span>
+  <span class="chip" *ngFor="let s of getSelectedSizes()">
+    Tamaño: {{ s }}
+    <button type="button" (click)="clearSingleSize(s)" [title]="'Quitar tamaño ' + s" [attr.aria-label]="'Quitar tamaño ' + s">×</button>
+  </span>
+</div>
+
 <div class="products-container">
   <div *ngIf="filteredProducts.length === 0" class="no-products">
     <p>No se encontraron productos.</p>
