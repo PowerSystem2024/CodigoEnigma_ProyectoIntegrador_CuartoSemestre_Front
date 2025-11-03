@@ -11,6 +11,5 @@ import { Product } from '../../models/product.model';
 
 export class ProductItemComponent {
   @Input() product!: Product;
-
-  ngOnInit() {}
+  @Input() category!: number;
 }

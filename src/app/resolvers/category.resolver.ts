@@ -6,8 +6,6 @@ import { Category } from '../models/category.model';
 
 export const categoryResolver: ResolveFn<Category> = (route: ActivatedRouteSnapshot) => {
   const categoryService = inject(CategoryService);
-  // LML: Se comenta hasta tener filtros, poner en id la que corresponda a tu db
-  // const id = route.paramMap.get('category_id')!;
-  const id = '5';
+  const id = route.paramMap.get('category_id')!;
   return categoryService.getCategoryWithProducts(id);
 };

@@ -4,6 +4,7 @@ import { Product } from '../../models/product.model';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ActivatedRoute } from '@angular/router';
 import { NebularModule } from '../../shared/nebular-module';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-product-list',
@@ -17,11 +18,13 @@ import { NebularModule } from '../../shared/nebular-module';
   ]
 })
 export class ProductListComponent implements OnInit {
+  categories: Category[] = [];
   products: Product[] = [];
+  hasFilters: boolean = true;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.products = this.route.snapshot.data['products'];
+    this.categories = this.route.snapshot.data['categories'];
   }
 }

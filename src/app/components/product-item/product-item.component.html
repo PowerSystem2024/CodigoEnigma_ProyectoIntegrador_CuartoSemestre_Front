@@ -1,16 +1,9 @@
-<a class="product-card" href="/products/{{product.id}}">
+<a class="product-card" href="/products/{{product.id}}/{{category}}">
   <img class="product-img" src="{{product.image_url}}" alt="">
   <div class="product-info">
     <div class="product-name">{{ product.name }}</div>
     <div class="product-details-container">
       <div class="product-price">${{ product.price }}</div>
-      <div class="product-stars">
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-      </div>
     </div>
   </div>
 </a>

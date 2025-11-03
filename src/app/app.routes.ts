@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { productsResolver } from './resolvers/products.resolver';
 import { productResolver } from './resolvers/product.resolver';
 import { categoryResolver } from './resolvers/category.resolver';
 import { myOrdersResolver } from './resolvers/my-order.resolver';
 import { featuredResolver } from './resolvers/featured.resolver';
+import { categoriesResolver } from './resolvers/categories.resolver';
 
 export const routes: Routes = [
     {
@@ -21,10 +21,10 @@ export const routes: Routes = [
             import('./components/product-list/product-list.component')
             .then(m => m.ProductListComponent),
             resolve: {
-                products: productsResolver
+                categories: categoriesResolver,
             }
     }, {
-        path: 'products/:product_id',
+        path: 'products/:product_id/:category_id',
         loadComponent: () =>
             import('./components/product-details/product-details.component')
             .then(m => m.ProductDetailsComponent),

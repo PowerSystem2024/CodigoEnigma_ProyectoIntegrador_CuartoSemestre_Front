@@ -1,7 +1,7 @@
 <div class="carousel-container">
   <div class="carousel-wrapper">
     <div class="carousel-track" [ngClass]="{'transition': hasTransition}" [style.transform]="transformStyle">
-      <div class="carousel-item" *ngFor="let product of products">
+      <a href="/products/{{product.id}}" class="carousel-item" *ngFor="let product of products">
         <img class="product-image" src="{{ product.image_url }}" alt="">
         <div class="product-container">
             <div class="product-name">
@@ -14,7 +14,7 @@
               {{ product.price | currency }}
             </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
   <button (click)="prevSlide()" class="carousel-btn prev" aria-label="Producto anterior"><span>❮</span></button>

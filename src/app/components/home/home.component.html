@@ -25,7 +25,8 @@
               <app-product-item 
                 class="product-item" 
                 *ngFor="let product of category.products" 
-                [product]="product">
+                [product]="product" 
+                [category]="category.id">
               </app-product-item>
             </div>
           </nb-card-body>

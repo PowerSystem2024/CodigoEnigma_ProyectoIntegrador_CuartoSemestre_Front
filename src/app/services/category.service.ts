@@ -20,6 +20,10 @@ export class CategoryService {
     return this.http.get<Category>(this.baseUrl+`/${id}`);
   }
 
+  getCategoriesWithProducts(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl+`/with_products/`);
+  }
+
   getCategoryWithProducts(id: string): Observable<Category> {
     return this.http.get<Category>(this.baseUrl+`/with_products/${id}`);
   }
