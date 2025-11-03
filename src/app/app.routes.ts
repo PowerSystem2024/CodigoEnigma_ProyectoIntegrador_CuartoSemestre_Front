@@ -3,6 +3,7 @@ import { productsResolver } from './resolvers/products.resolver';
 import { productResolver } from './resolvers/product.resolver';
 import { categoryResolver } from './resolvers/category.resolver';
 import { myOrdersResolver } from './resolvers/my-order.resolver';
+import { featuredResolver } from './resolvers/featured.resolver';
 
 export const routes: Routes = [
     {
@@ -10,7 +11,10 @@ export const routes: Routes = [
         pathMatch: 'full',
         loadComponent: () =>
             import('./components/home/home.component')
-            .then(m => m.HomeComponent)
+            .then(m => m.HomeComponent),
+            resolve: {
+                featured: featuredResolver
+            }
     }, {
         path: 'products',
         loadComponent: () =>

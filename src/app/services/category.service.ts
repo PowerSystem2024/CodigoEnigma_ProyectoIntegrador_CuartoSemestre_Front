@@ -23,5 +23,8 @@ export class CategoryService {
   getCategoryWithProducts(id: string): Observable<Category> {
     return this.http.get<Category>(this.baseUrl+`/with_products/${id}`);
   }
-  
+
+  getFeatured(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl+'/featured');
+  }
 }

@@ -55,7 +55,10 @@ export class HeaderComponent implements OnInit {
         this.checkAuthStatus();
       }
     });
-    this.fetchActiveOrder();
+
+    if(this.isLoggedIn) {
+      this.fetchActiveOrder();
+    }
 
     this.eventBusService.onEvent().subscribe(event => {
       if (event.type === 'cart-update') {

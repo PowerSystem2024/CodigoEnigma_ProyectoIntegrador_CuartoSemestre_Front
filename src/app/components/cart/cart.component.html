@@ -6,6 +6,7 @@
     <button nbButton status="primary">Ir a Checkout</button>
   </div>
 </div>
-<div *ngIf="!order">
-  <p>El carrito está vacío.</p>
+<div *ngIf="!order" class="empty-cart-container">
+  <nb-icon icon="shopping-cart-outline" status="basic" style="font-size: 2rem;"></nb-icon>
+  <div>El carrito está vacío.</div>
 </div>

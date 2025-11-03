@@ -16,7 +16,6 @@ import {
   NbIconModule,
   NbSearchModule,
   NbButtonGroupModule,
-  NbAccordionModule,
   NbListModule,
   NbContextMenuModule,
   NbBadgeModule,
@@ -49,7 +48,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbIconModule,
     NbSearchModule,
     NbButtonGroupModule,
-    NbAccordionModule,
     NbListModule,
     NbContextMenuModule,
     NbEvaIconsModule,
@@ -78,7 +76,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbIconModule,
     NbSearchModule,
     NbButtonGroupModule,
-    NbAccordionModule,
     NbListModule,
     NbContextMenuModule,
     NbEvaIconsModule,
@@ -90,6 +87,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbTooltipModule,
     NbAccordionModule,
     NbAlertModule,
+    NbToggleComponent,
   ]
 })
 export class NebularModule {}
