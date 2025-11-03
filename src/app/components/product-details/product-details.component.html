@@ -1,1 +1,31 @@
-<p>product-details works!</p>
+<nb-card class="product-details-card">
+    <nb-card-body class="product-image-details-container">
+        <img class="product-image" src="{{ product.image_url }}" alt="">
+        <div class="product-details-container">
+            <div class="name">
+                {{ product.name }}
+            </div>
+            <div class="description">
+                {{ product.description }}
+            </div>
+            <div class="price-and-amount">
+                <nb-button-group status="control">
+                    <button nbButton (click)="changeAmount(-1)">-</button>
+                    <button nbButton>{{amount}}</button>
+                    <button nbButton (click)="changeAmount(1)">+</button>
+                </nb-button-group>
+                <div style="font-size: 2rem; text-align:right;">{{ (product.price * amount) | currency }}</div>
+            </div>
+            <button nbButton class="add-to-cart-btn" status="primary" fullWidth (click)="addToCart()">
+                Agregar <nb-icon icon="shopping-cart-outline"></nb-icon>
+            </button>
+        </div>
+        <div class="category-container" *ngIf="category">
+            <h2>Otros Productos de {{category.name}}</h2>
+            <div class="related-products-container">
+                <app-product-item class="product-item" *ngFor="let product of category.products" [product]="product">
+                </app-product-item>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import {
   NbThemeModule,
   NbLayoutModule,
-  NbDialogModule, // Sirve para mostrar los dialogos (ventanas modales) - Se uará en "Registro", "Editar producto", etc.
-  NbToastrModule, // Sirve para mostrar los toasts (notificaciones temporales/ventanas emergentes) - se usará en "registro exitoso", "producto añadido", etc.
+  NbDialogModule,
+  NbToastrModule,
   NbMenuModule,
   NbUserModule,
   NbInputModule,
@@ -15,7 +15,8 @@ import {
   NbCardModule,
   NbIconModule,
   NbSearchModule,
-  NbContextMenuModule, // Menús contextuales
+  NbButtonGroupModule,
+  NbContextMenuModule,
   NbBadgeModule,
   NbSpinnerModule,
   NbToggleComponent,
@@ -45,6 +46,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbCardModule,
     NbIconModule,
     NbSearchModule,
+    NbButtonGroupModule,
     NbContextMenuModule,
     NbEvaIconsModule,
     NbBadgeModule,
@@ -71,6 +73,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbCardModule,
     NbIconModule,
     NbSearchModule,
+    NbButtonGroupModule,
     NbContextMenuModule,
     NbEvaIconsModule,
     NbBadgeModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ActivatedRoute } from '@angular/router';
+import { NebularModule } from '../../shared/nebular-module';
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-list.component.scss'],
   imports: [
     CommonModule,
-    ProductItemComponent
+    ProductItemComponent,
+    NebularModule
   ]
 })
 export class ProductListComponent implements OnInit {
