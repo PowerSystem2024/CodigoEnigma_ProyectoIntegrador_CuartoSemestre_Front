@@ -2,10 +2,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  NbThemeModule,
   NbLayoutModule,
+  NbDialogModule,
+  NbToastrModule,
+  NbMenuModule,
   NbUserModule,
   NbInputModule,
-  NbMenuModule,
   NbButtonModule,
   NbPopoverModule,
   NbActionsModule,
@@ -15,15 +18,30 @@ import {
   NbButtonGroupModule,
   NbAccordionModule,
   NbListModule,
+  NbContextMenuModule,
+  NbBadgeModule,
+  NbSpinnerModule,
+  NbToggleComponent,
+  NbCheckboxModule,
+  NbSelectModule,
+  NbTooltipModule,
+  NbAccordionModule,
+  NbAlertModule,
+  NbToggleModule,
 } from '@nebular/theme';
+
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [
     CommonModule,
+    NbThemeModule.forRoot(),
     NbLayoutModule,
+    NbDialogModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NbMenuModule.forRoot(),
     NbUserModule,
     NbInputModule,
-    NbMenuModule,
     NbButtonModule,
     NbPopoverModule,
     NbActionsModule,
@@ -33,10 +51,23 @@ import {
     NbButtonGroupModule,
     NbAccordionModule,
     NbListModule,
+    NbContextMenuModule,
+    NbEvaIconsModule,
+    NbBadgeModule,
+    NbSpinnerModule,
+    NbToggleModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    NbTooltipModule,
+    NbAccordionModule,
+    NbAlertModule,
   ],
   exports: [
     CommonModule,
+    NbThemeModule,
     NbLayoutModule,
+    NbDialogModule,
+    NbToastrModule,
     NbUserModule,
     NbInputModule,
     NbMenuModule,
@@ -49,6 +80,16 @@ import {
     NbButtonGroupModule,
     NbAccordionModule,
     NbListModule,
+    NbContextMenuModule,
+    NbEvaIconsModule,
+    NbBadgeModule,
+    NbSpinnerModule,
+    NbToggleModule,
+    NbCheckboxModule,
+    NbSelectModule,
+    NbTooltipModule,
+    NbAccordionModule,
+    NbAlertModule,
   ]
 })
 export class NebularModule {}
