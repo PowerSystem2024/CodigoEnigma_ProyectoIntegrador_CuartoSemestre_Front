@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NebularModule } from '../../shared/nebular-module';
 import { Category } from '../../models/category.model';
 import { ProductItemComponent } from '../product-item/product-item.component';
+import { ProductService } from '../../services/product.service';
+import { EventBusService } from '../../shared/event-bus.service';
 
 @Component({
   selector: 'app-product-details',
@@ -22,13 +24,15 @@ export class ProductDetailsComponent {
   category: Category = {} as Category;
   amount: number = 1;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private eventBusService: EventBusService
+  ) {}
 
   ngOnInit(): void {
     this.product = this.route.snapshot.data['product'];
     this.category = this.route.snapshot.data['category'];
-    
-    console.log(this.product, this.category);
   }
 
   changeAmount(change: number): void {
@@ -39,8 +43,20 @@ export class ProductDetailsComponent {
   }
 
   addToCart(): void {
-    // LML: Cuando este el carrito, aca se llamara al servicio para agregar el producto al carrito
-    console.log(`Added ${this.amount} of ${this.product.name} to cart.`);
+    const user = JSON.parse(localStorage.getItem('user')!);
+    if (user) {
+      this.productService.addToCart(this.product.id, {quantity: this.amount, user_id: user.id}).subscribe({
+        next: (response) => {
+          window.alert("Producto agregado al carrito");
+          this.eventBusService.emit({ type: 'cart-update', payload: 'Orders updated' });
+        },
+        error: (error) => {
+          window.alert("Error al agregar el producto al carrito");
+        }
+      });
+    } else {
+      window.alert("Por favor, inicie sesión para agregar productos al carrito.");
+    }
   }
 
 }

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { productsResolver } from './resolvers/products.resolver';
 import { productResolver } from './resolvers/product.resolver';
 import { categoryResolver } from './resolvers/category.resolver';
+import { myOrdersResolver } from './resolvers/my-order.resolver';
 
 export const routes: Routes = [
     {
@@ -28,10 +29,13 @@ export const routes: Routes = [
                 category: categoryResolver,
             }
     }, {
-        path: 'my-order',
+        path: 'my-orders',
         loadComponent: () =>
-            import('./components/my-order/my-order.component')
-            .then(m => m.MyOrderComponent)
+            import('./components/my-orders/my-orders.component')
+            .then(m => m.MyOrdersComponent),
+            resolve: {
+                orders: myOrdersResolver
+            }
     }, {
         path: '**',
         loadComponent: () =>

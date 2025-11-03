@@ -12,11 +12,5 @@ import { Product } from '../../models/product.model';
 export class ProductItemComponent {
   @Input() product!: Product;
 
-  ngOnInit() {
-    console.log(this.product);
-  }
-
-  addToCart() {
-    console.log('Agregado:', this.product);
-  }
+  ngOnInit() {}
 }

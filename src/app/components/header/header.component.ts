@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 import { NebularModule } from '../../shared/nebular-module';
+import { Order } from '../../models/order.model';
+import { OrderService } from '../../services/order.service';
+import { EventBusService } from '../../shared/event-bus.service';
 import { RegisterDialogComponent } from '../../auth/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { LogoutDialogComponent } from '../../auth/logout-dialog/logout-dialog.component';
@@ -23,29 +26,59 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   currentUser: any = null;
   isLoggedIn = false;
+  activeOrder: Order | undefined;
 
   constructor(
+    private orderService: OrderService,
+    private eventBusService: EventBusService,
     private dialogService: NbDialogService,
     private menuService: NbMenuService,
     private searchService: NbSearchService,
     private router: Router
-  ) {}
-
+  ) {
+    this.searchService.onSearchSubmit().subscribe((data: any) => {
+      console.log(data);
+    })
+  }
 
   ngOnInit(): void {
+    const vm = this
+    
     console.log('🚀 HeaderComponent inicializado');
     this.checkAuthStatus();
     this.setupAuthListener();
 
-    // Escuchar cambios en el localStorage entre pestañas
+    // TODO CAMBIAR ESTO A EVENTBUSSERVICE
     window.addEventListener('storage', (event) => {
       console.log('🔄 Evento storage detectado:', event.key);
       if (event.key === 'currentUser') {
         this.checkAuthStatus();
       }
     });
+    this.fetchActiveOrder();
+
+    this.eventBusService.onEvent().subscribe(event => {
+      if (event.type === 'cart-update') {
+        vm.fetchActiveOrder();
+      }
+    });
   }
 
+  fetchActiveOrder(): void {
+    this.orderService.getActiveOrderByUser(this.currentUser.id).subscribe((order: Order) => {
+      if (order.hasOwnProperty('id')) {
+        this.activeOrder = order;
+      }
+    });
+  }
+
+  getTotalItems(): string {
+    if (this.activeOrder && this.activeOrder.order_products) {
+      return this.activeOrder.order_products.reduce((total, op) => total + op.quantity, 0) + '';
+    }
+    return '';
+  }
+ 
   // Verificar si hay usuario logueado
   private checkAuthStatus(): void {
     const userData = localStorage.getItem('currentUser');

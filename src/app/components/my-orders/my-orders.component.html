@@ -1,0 +1,17 @@
+<nb-accordion multi>
+  <nb-accordion-item *ngFor="let order of orders; let i = index" [collapsed]="i !== 0">
+    <nb-accordion-item-header [ngClass]="order.status">
+      <div class="header-title"> 
+        Orden #{{order.id}} 
+        <div class="header-images-container">
+          <img *ngFor="let product of order.products; let k = index" [src]="product.image_url" alt="{{ product.name }}" class="header-image"/>
+          <div *ngIf="order.products.length > 5">+{{order.products.length - 5}}</div>
+        </div>
+      </div>
+      <div class="header-status"> {{ order.status.toUpperCase() }} </div>
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <app-cart [order]="order" [parentClass]="'my-orders-cart'"></app-cart>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>

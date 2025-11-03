@@ -1,0 +1,19 @@
+.cart-order-products-container {
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.header-cart {
+    max-height: 30rem;
+    width: 40rem;
+}
+.actions-container {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.date {
+    text-align: center;
+    padding: 0rem 1rem 1rem 1rem;
+}

@@ -19,18 +19,10 @@
     <nb-action>
       <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
     </nb-action>
-
-    <!-- Carrito -->
-    <nb-action icon="shopping-cart-outline"
-               [nbPopover]="cart"
-               nbPopoverPlacement="bottom"
-               badgeText="12"
-               badgePosition="bottom right"
-               badgeStatus="info"
-               title="Carrito">
-    </nb-action>
+    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" [badgeText]="getTotalItems()"
+               badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
     <ng-template #cart>
-      <app-cart></app-cart>
+      <app-cart [order]="activeOrder" [parentClass]="'header-cart'"></app-cart>
     </ng-template>
 
     <!-- Menu de Usuario -->
