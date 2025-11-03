@@ -1,4 +1,161 @@
-header {
-  background: var(--banner-color);
-  color: var(--text-color);
-  padding: 10px;}
+// Estilos del layout del header
+.left, .center, .right {
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  gap: 0.75rem;
+  min-width: 8rem;
+}
+
+.center {
+  flex: 1;
+  justify-content: center;
+}
+
+.right {
+  gap: 0.5rem;
+}
+
+// Estilos del logo
+.logo {
+  height: 50px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+// Estilos del menú de Nebular
+nb-menu {
+  width: 13rem;
+}
+
+// Estilos del buscador
+::ng-deep .search nb-icon {
+  height: 30px !important;
+  width: 30px !important;
+}
+
+// Estilos de enlaces
+nb-action a, .logo-container {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Estilos del menú personalizado de usuario
+.custom-user-menu {
+  min-width: 200px;
+  padding: 0.5rem 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-basic-300);
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+    margin: 0.125rem 0.25rem;
+
+    &:hover {
+      background-color: var(--color-basic-200);
+      transform: translateY(-1px);
+    }
+
+    nb-icon {
+      font-size: 1.125rem;
+      color: var(--color-basic-600);
+      transition: color 0.2s ease;
+    }
+
+    span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-basic-800);
+      transition: color 0.2s ease;
+    }
+
+    &.logout-item {
+      nb-icon, span {
+        color: var(--color-danger-600);
+      }
+
+      &:hover {
+        background-color: var(--color-danger-100);
+
+        nb-icon, span {
+          color: var(--color-danger-700);
+        }
+      }
+    }
+  }
+
+  .menu-divider {
+    height: 1px;
+    background-color: var(--color-basic-300);
+    margin: 0.5rem 0.75rem;
+  }
+}
+
+// Estilos para el contenedor del menú (puedes eliminar esto si no lo usas)
+.user-menu-container {
+  padding: 0.5rem;
+
+  .logout-button-test {
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+  }
+}
+
+// Responsive
+@media (max-width: 800px) {
+  .center {
+    display: none;
+  }
+
+  .custom-user-menu {
+    min-width: 180px;
+
+    .menu-item {
+      padding: 0.625rem 0.875rem;
+
+      span {
+        font-size: 0.8125rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .right {
+    gap: 0.25rem;
+  }
+}

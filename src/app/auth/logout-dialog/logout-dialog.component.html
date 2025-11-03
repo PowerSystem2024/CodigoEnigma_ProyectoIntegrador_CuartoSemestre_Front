@@ -1,0 +1,50 @@
+<nb-card class="logout-card">
+  <nb-card-header>
+    <div class="header-content">
+      <h5>Cerrar Sesión</h5>
+      <button nbButton
+              ghost
+              size="small"
+              (click)="cancelLogout()"
+              class="close-button"
+              title="Cancelar cierre de sesión"
+              aria-label="Cancelar cierre de sesión">
+        <nb-icon icon="close-outline" aria-hidden="true"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="confirmation-content">
+      <div class="icon-container">
+        <nb-icon icon="log-out-outline" class="logout-icon" aria-hidden="true"></nb-icon>
+      </div>
+      <h6 class="confirmation-title">¿Estás seguro que deseas cerrar sesión?</h6>
+      <p class="confirmation-message">Serás redirigido a la página de inicio.</p>
+    </div>
+  </nb-card-body>
+
+  <nb-card-footer>
+    <div class="action-buttons">
+      <button
+        nbButton
+        status="basic"
+        type="button"
+        (click)="cancelLogout()"
+        class="cancel-button">
+        <nb-icon icon="close-outline" aria-hidden="true"></nb-icon>
+        No, mantener sesión
+      </button>
+
+      <button
+        nbButton
+        status="primary"
+        type="button"
+        (click)="confirmLogout()"
+        class="confirm-button">
+        <nb-icon icon="checkmark-outline" aria-hidden="true"></nb-icon>
+        Sí, cerrar sesión
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>

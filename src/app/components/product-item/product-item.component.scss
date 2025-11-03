@@ -1,5 +1,12 @@
 .product-card {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
 
+.product-card:hover {
+    color: var(--secondary-color);
+    transform: scale(1.02);
 }
 
 .product-img {
@@ -31,4 +38,10 @@
 .product-stars {
     font-size: 18px;
     font-weight: 200;
+}
+
+@media screen and (max-width: 600px) {
+    .product-stars {
+        display: none;
+    }
 }

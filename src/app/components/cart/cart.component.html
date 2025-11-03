@@ -1,5 +1,11 @@
-<h2>Carrito</h2>
-<ul>
-  <!-- Luego acá listamos productos agregados -->
-  <li>No hay productos en el carrito</li>
-</ul>
+<div class="cart-order-products-container" [ngClass]="parentClass" *ngIf="order">
+  <app-order-products [products]="order.products" [active]="order.status == 'active'"></app-order-products> <br>
+  <div class="date">Fecha del Pedido: {{ order.date | date:'medium' }}</div>
+  <div *ngIf="order.status == 'active'" class="actions-container">
+    <button nbButton status="danger" (click)="closeOrder(order.id)">Cancelar</button>
+    <button nbButton status="primary">Ir a Checkout</button>
+  </div>
+</div>
+<div *ngIf="!order">
+  <p>El carrito está vacío.</p>
+</div>

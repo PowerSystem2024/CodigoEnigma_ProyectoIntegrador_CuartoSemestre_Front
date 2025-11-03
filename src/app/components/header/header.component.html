@@ -1,3 +1,59 @@
-<header>
-  <h1>Mi Tienda</h1>
-</header>
+<div class="left">
+  <a href="/" class="logo-container">
+    <img src="assets/images/logo.png" alt="logo" class="logo" />
+    <span class="title">Mi App</span>
+  </a>
+</div>
+
+<div class="center">
+  <nb-actions size="medium">
+    <nb-action><a href="/">Home</a></nb-action>
+    <nb-action><a href="/products">Catálogo</a></nb-action>
+    <nb-action><a href="/my-order">Mis Pedidos</a></nb-action>
+  </nb-actions>
+</div>
+
+<div class="right">
+  <nb-actions size="medium" class="actions-right">
+    <!-- Buscador -->
+    <nb-action>
+      <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
+    </nb-action>
+    <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" [badgeText]="getTotalItems()"
+               badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
+    <ng-template #cart>
+      <app-cart [order]="activeOrder" [parentClass]="'header-cart'"></app-cart>
+    </ng-template>
+
+    <!-- Menu de Usuario -->
+    <nb-action icon="person-outline" [nbPopover]="userMenuTemplate" nbPopoverPlacement="bottom" title="User"></nb-action>
+      <!-- Menú para usuario logueado -->
+      <ng-template #userMenuTemplate>
+        <div *ngIf="isLoggedIn" class="custom-user-menu">
+          <!-- <div class="menu-item" (click)="openProfile()">
+            <nb-icon icon="person-outline"></nb-icon>
+            <span>Perfil</span>
+          </div> -->
+      
+          <div class="menu-item" (click)="goToOrders()">
+            <nb-icon icon="shopping-bag-outline"></nb-icon>
+            <span>Mis Pedidos</span>
+          </div>
+      
+          <div class="menu-divider"></div>
+      
+          <div class="menu-item logout-item" (click)="openLogoutDialog()">
+            <nb-icon icon="log-out-outline"></nb-icon>
+            <span>Cerrar Sesión</span>
+          </div>
+        </div>
+        <div *ngIf="!isLoggedIn" class="custom-user-menu">
+          <div class="menu-item logout-item" (click)="openLoginDialog()">
+            <nb-icon icon="log-out-outline"></nb-icon>
+            <span>Iniciar Sesión</span>
+          </div>
+        </div>
+      </ng-template>
+    </nb-actions>
+</div>
+
