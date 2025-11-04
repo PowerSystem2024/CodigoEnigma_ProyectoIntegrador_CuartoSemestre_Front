@@ -26,15 +26,21 @@ nb-accordion-item-header {
     }
 }
 
-.active {
+.active, .paid {
     background-color: var(--secondary-color);
     color: var(--secondary-color-text);
 }
 
-.closed {
+.closed, .failed {
     background-color: var(--primary-color);
     color: var(--primary-color-text);
 }
+
+.pending {
+    background-color: var(--terciary-color);
+    color: var(--terciary-color-text);
+}
+
 
 nb-accordion-item-body {
     padding: 0 1rem !important;

@@ -13,6 +13,7 @@ import {
   NbUserModule,
   NbButtonModule,
   NbIconModule,
+  NbToastrModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { provideRouter } from '@angular/router';
@@ -26,6 +27,7 @@ bootstrapApplication(AppComponent, {
       NbLayoutModule,
       NbSidebarModule.forRoot(),
       NbMenuModule.forRoot(),
+      NbToastrModule.forRoot(),
       NbUserModule,
       NbButtonModule,
       NbIconModule,

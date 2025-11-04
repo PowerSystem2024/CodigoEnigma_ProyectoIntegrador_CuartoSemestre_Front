@@ -7,6 +7,7 @@ import { Category } from '../../models/category.model';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { ProductService } from '../../services/product.service';
 import { EventBusService } from '../../shared/event-bus.service';
+import { NbLayoutModule, NbToastrModule, NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +16,8 @@ import { EventBusService } from '../../shared/event-bus.service';
     CurrencyPipe,
     NebularModule,
     ProductItemComponent,
+    NbLayoutModule,
+    NbToastrModule,
   ],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
@@ -27,7 +30,8 @@ export class ProductDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private toastrService: NbToastrService, 
   ) {}
 
   ngOnInit(): void {
@@ -43,19 +47,20 @@ export class ProductDetailsComponent {
   }
 
   addToCart(): void {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    if (user) {
-      this.productService.addToCart(this.product.id, {quantity: this.amount, user_id: user.id}).subscribe({
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+    if (currentUser) {
+      this.productService.addToCart(this.product.id, {quantity: this.amount, user_id: currentUser.id}).subscribe({
         next: (response) => {
-          window.alert("Producto agregado al carrito");
+          this.toastrService.success(`Se agrego ${this.amount}x${this.product.name} al carrito`, 'Agregado!');
           this.eventBusService.emit({ type: 'cart-update', payload: 'Orders updated' });
         },
         error: (error) => {
           window.alert("Error al agregar el producto al carrito");
+          this.toastrService.danger('Error al agregar el producto al carrito', 'Error!');
         }
       });
     } else {
-      window.alert("Por favor, inicie sesión para agregar productos al carrito.");
+      this.toastrService.danger('Para agregar productos al carrito por favor, inicia sesión o registrate.', 'Ingresa para usar el Carrito');
     }
   }
 

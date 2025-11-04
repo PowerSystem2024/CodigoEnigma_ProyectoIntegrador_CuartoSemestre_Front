@@ -1,38 +1,34 @@
-<nb-layout>
-  <nb-layout-column class="home-main-container">
+<div class="home-main-container">
+  <!-- Featured category -->
+  <div *ngIf="featuredCategory">
+    <nb-card style="margin: 15px;">
+      <nb-card-header>
+        {{ featuredCategory.name }}
+      </nb-card-header>
+      <nb-card-body>
+        <app-featured-products [products]="featuredCategory.products" [category]="featuredCategory"></app-featured-products>
+      </nb-card-body>
+    </nb-card>
+  </div>
 
-    <!-- Featured category -->
-    <div *ngIf="featuredCategory">
+  <!-- Resto de las categorías -->
+  <div *ngFor="let category of categories">
+    <ng-container *ngIf="category.id !== featuredCategory?.id && category.products.length > 0">
       <nb-card style="margin: 15px;">
         <nb-card-header>
-          {{ featuredCategory.name }}
+          {{ category.name }}
         </nb-card-header>
         <nb-card-body>
-          <app-featured-products [products]="featuredCategory.products"></app-featured-products>
+          <div class="categoty-products-container">
+            <app-product-item 
+              class="product-item" 
+              *ngFor="let product of category.products" 
+              [product]="product" 
+              [category]="category.id">
+            </app-product-item>
+          </div>
         </nb-card-body>
       </nb-card>
-    </div>
-
-    <!-- Resto de las categorías -->
-    <div *ngFor="let category of categories">
-      <ng-container *ngIf="category.id !== featuredCategory?.id">
-        <nb-card style="margin: 15px;">
-          <nb-card-header>
-            {{ category.name }}
-          </nb-card-header>
-          <nb-card-body>
-            <div class="categoty-products-container">
-              <app-product-item 
-                class="product-item" 
-                *ngFor="let product of category.products" 
-                [product]="product" 
-                [category]="category.id">
-              </app-product-item>
-            </div>
-          </nb-card-body>
-        </nb-card>
-      </ng-container>
-    </div>
-
-  </nb-layout-column>
-</nb-layout>
+    </ng-container>
+  </div>
+</div>

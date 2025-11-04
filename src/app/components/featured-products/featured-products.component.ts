@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { NebularModule } from '../../shared/nebular-module';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-featured-products',
@@ -15,7 +16,8 @@ import { NebularModule } from '../../shared/nebular-module';
   styleUrls: ['./featured-products.component.scss']
 })
 export class FeaturedProductsComponent implements OnInit, OnDestroy {
-  @Input() products: Product[] = [];;
+  @Input() products: Product[] = [];
+  @Input() category!: Category;
   
   currentIndex: number = 0;
   itemsToShow: number = 1;

@@ -4,6 +4,7 @@ import { OrderProductsComponent } from '../order-products/order-products.compone
 import { Order } from '../../models/order.model';
 import { OrderService } from '../../services/order.service';
 import { NebularModule } from '../../shared/nebular-module';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -20,7 +21,10 @@ export class CartComponent {
     @Input() order: Order | undefined;
     @Input() parentClass: string = '';
     
-    constructor(private orderService: OrderService) {}
+    constructor(
+        private orderService: OrderService,
+        private router: Router,
+    ) {}
 
     ngOnInit() {
         if (this.order && this.order.products) {
@@ -39,5 +43,20 @@ export class CartComponent {
                 vm.order!.status = 'closed';
             });
         }
+    }
+
+    payOrder(orderId: number) {
+        const vm = this
+        const userData = JSON.parse(localStorage.getItem('currentUser') || '');
+        this.orderService.payOrder(orderId, userData.id).subscribe((response) => {
+            const html = `<html><body><script>window.location.href = "${response.payment_url}";</script></body></html>`;
+            const blob = new Blob([html], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+            window.open(blobUrl, '_blank');
+            vm.orderService.pendingOrder(orderId).subscribe(() => {
+                vm.order!.status = 'pending';
+                vm.router.navigate(['/my-orders']);
+            });
+        });
     }
 }

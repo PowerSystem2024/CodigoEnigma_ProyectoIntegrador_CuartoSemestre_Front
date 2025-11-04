@@ -31,5 +31,13 @@ export class OrderService {
   closeOrder(orderId: number): Observable<Order> {
     return this.http.patch<Order>(`${this.baseUrl}/${orderId}/change-status`, {status: 'closed'});
   }
+
+  pendingOrder(orderId: number): Observable<Order> {
+    return this.http.patch<Order>(`${this.baseUrl}/${orderId}/change-status`, {status: 'pending'});
+  }
+
+  payOrder(orderId: number, userId: number): Observable<any> {
+    return this.http.post<Order>(`${environment.apiUrl}/payments/create`, {"order_id": orderId, "user_id": userId});
+  }
   
 }

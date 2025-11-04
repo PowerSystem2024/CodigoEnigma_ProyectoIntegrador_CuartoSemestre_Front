@@ -1,33 +1,55 @@
-<nb-card class="product-details-card">
-    <nb-card-body class="product-image-details-container">
-        <img class="product-image" src="{{ product.image_url }}" alt="">
+<nb-layout class="no-padding-layout">
+  <nb-layout-column class="no-padding-column center-column">
+    <nb-card class="product-details-card">
+      <nb-card-body class="product-image-details-container">
+        <img class="product-image" [src]="product.image_url" alt="" />
         <div class="product-details-container">
-            <div class="name">
-                {{ product.name }}
+          <div class="name">
+            {{ product.name }}
+          </div>
+          <div class="description">
+            {{ product.description }}
+          </div>
+
+          <div class="price-and-amount">
+            <nb-button-group status="control">
+              <button nbButton (click)="changeAmount(-1)">-</button>
+              <button nbButton>{{ amount }}</button>
+              <button nbButton (click)="changeAmount(1)">+</button>
+            </nb-button-group>
+            <div style="font-size: 2rem; text-align:right;">
+              {{ (product.price * amount) | currency }}
             </div>
-            <div class="description">
-                {{ product.description }}
-            </div>
-            <div class="price-and-amount">
-                <nb-button-group status="control">
-                    <button nbButton (click)="changeAmount(-1)">-</button>
-                    <button nbButton>{{amount}}</button>
-                    <button nbButton (click)="changeAmount(1)">+</button>
-                </nb-button-group>
-                <div style="font-size: 2rem; text-align:right;">{{ (product.price * amount) | currency }}</div>
-            </div>
-            <button nbButton class="add-to-cart-btn" status="primary" fullWidth (click)="addToCart()">
-                Agregar <nb-icon icon="shopping-cart-outline"></nb-icon>
-            </button>
+          </div>
+
+          <button
+            nbButton
+            class="add-to-cart-btn"
+            status="primary"
+            fullWidth
+            (click)="addToCart()"
+          >
+            Agregar <nb-icon icon="shopping-cart-outline"></nb-icon>
+          </button>
         </div>
+
         <div class="category-container" *ngIf="category">
-            <h2>Otros Productos de {{category.name}}</h2>
-            <div class="related-products-container">
-                <div style="display: contents;" *ngFor="let catProduct of category.products">
-                    <app-product-item class="product-item" [product]="catProduct" [category]="category.id" *ngIf="catProduct.id != product.id">
-                    </app-product-item>
-                </div>
+          <h2>Otros Productos de {{ category.name }}</h2>
+          <div class="related-products-container">
+            <div
+              style="display: contents;"
+              *ngFor="let catProduct of category.products"
+            >
+              <app-product-item
+                class="product-item"
+                [product]="catProduct"
+                [category]="category.id"
+                *ngIf="catProduct.id != product.id"
+              ></app-product-item>
             </div>
+          </div>
         </div>
-    </nb-card-body>
-</nb-card>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

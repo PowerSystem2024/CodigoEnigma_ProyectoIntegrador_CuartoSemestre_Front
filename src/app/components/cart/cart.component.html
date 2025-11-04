@@ -3,7 +3,7 @@
   <div class="date">Fecha del Pedido: {{ order.date | date:'medium' }}</div>
   <div *ngIf="order.status == 'active'" class="actions-container">
     <button nbButton status="danger" (click)="closeOrder(order.id)">Cancelar</button>
-    <button nbButton status="primary">Ir a Checkout</button>
+    <button nbButton status="primary" (click)="payOrder(order.id)">Ir a Pagar</button>
   </div>
 </div>
 <div *ngIf="!order" class="empty-cart-container">

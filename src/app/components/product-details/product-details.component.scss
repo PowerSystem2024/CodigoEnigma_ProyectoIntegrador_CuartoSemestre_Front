@@ -91,3 +91,21 @@
     }
   }
 }
+
+.no-padding-layout,
+.no-padding-column {
+  padding: 0 !important;
+}
+
+.center-column {
+  max-width: 85rem;
+  margin: auto;
+}
+
+.nb-theme-default nb-layout .scrollable-container {
+  padding: 0 !important;
+}
+
+nb-card {
+  margin: 0 !important;
+}
