@@ -10,6 +10,8 @@ import { RegisterDialogComponent } from '../../auth/register-dialog/register-dia
 import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { LogoutDialogComponent } from '../../auth/logout-dialog/logout-dialog.component';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { SearchListComponent } from '../search-list/search-list.component';
 
 @Component({
     selector: 'app-header',
@@ -20,7 +22,8 @@ import { Router } from '@angular/router';
       CommonModule,
       CartComponent,
       NebularModule,
-      NbPopoverModule
+      NbPopoverModule,
+      FormsModule
     ]
 })
 export class HeaderComponent implements OnInit {
@@ -32,18 +35,12 @@ export class HeaderComponent implements OnInit {
     private orderService: OrderService,
     private eventBusService: EventBusService,
     private dialogService: NbDialogService,
-    private menuService: NbMenuService,
-    private searchService: NbSearchService,
-    private router: Router
-  ) {
-    this.searchService.onSearchSubmit().subscribe((data: any) => {
-      console.log(data);
-    })
-  }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     const vm = this
-    
+
     console.log('🚀 HeaderComponent inicializado');
     this.checkAuthStatus();
     this.setupAuthListener();
@@ -193,6 +190,15 @@ export class HeaderComponent implements OnInit {
 
     // Redirigir al home
     window.location.href = '/';
+  }
+
+  openSearch() {
+      this.dialogService.open(SearchListComponent, {
+      context: {},
+      hasBackdrop: true,
+      closeOnBackdropClick: true,
+      dialogClass: 'search-dialog-container',
+    });
   }
 
   goToOrders(): void {

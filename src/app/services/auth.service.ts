@@ -2,35 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-
-export interface RegisterPayload {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface RegisterResponse {
-  token: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-}
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  token: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-}
+import { LoginPayload, LoginResponse, RegisterPayload, RegisterResponse } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'

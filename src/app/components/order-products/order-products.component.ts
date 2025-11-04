@@ -1,4 +1,4 @@
-import { Component, input, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { NebularModule } from '../../shared/nebular-module';

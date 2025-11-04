@@ -16,9 +16,7 @@
 <div class="right">
   <nb-actions size="medium" class="actions-right">
     <!-- Buscador -->
-    <nb-action>
-      <nb-search type="column-curtain" placeholder="Buscar..." class="search"></nb-search>
-    </nb-action>
+    <nb-action icon="search-outline" (click)="openSearch()"></nb-action>
     <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" [badgeText]="getTotalItems()"
                badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
     <ng-template #cart>

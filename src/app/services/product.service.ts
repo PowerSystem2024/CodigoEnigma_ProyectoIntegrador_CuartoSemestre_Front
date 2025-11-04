@@ -23,5 +23,14 @@ export class ProductService {
   addToCart(id: string | number, data: { quantity: number, user_id: number }): Observable<any> {
     return this.http.post<any>(this.baseUrl+`/${id}/add_to_cart`, data);
   }
+
+  getProductsWithFilter(filter: any) {
+    const params = Object.keys(filter)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(filter[key])}`).join('&');
+
+    const url = params ? `${this.baseUrl}?${params}` : this.baseUrl;
+
+    return this.http.get<Product[]>(url);
+  }
   
 }

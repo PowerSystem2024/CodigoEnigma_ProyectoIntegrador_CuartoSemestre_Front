@@ -1,0 +1,29 @@
+<nb-card class="search-card">
+  <nb-card-header>
+    <div class="header-content">
+      <input
+        nbInput
+        fullWidth
+        placeholder="Buscar producto..."
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="searchProducts()"
+      />
+      <button nbButton status="primary" (click)="searchProducts()">Buscar</button>
+      <button nbButton status="danger" (click)="close()">
+        <nb-icon icon="close-outline"></nb-icon>
+      </button>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div *ngIf="!products?.length" class="empty-state">
+      <nb-icon icon="search-outline"></nb-icon>
+      <p *ngIf="!notFound">Buscá un producto para ver resultados</p>
+      <p *ngIf="notFound">No se encontro ningun producto con ese nombre...</p>
+    </div>
+
+    <div class="products-list" *ngIf="products?.length">
+      <app-product-item *ngFor="let p of products" [product]="p" [category]="p.categories[0].id"></app-product-item>
+    </div>
+  </nb-card-body>
+</nb-card>
