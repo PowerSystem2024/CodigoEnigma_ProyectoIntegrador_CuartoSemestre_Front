@@ -28,6 +28,10 @@ export class OrderService {
     return this.http.get<Order>(this.baseUrl+`/by-user/${userId}`);
   }
 
+  changeProdAmount(userId: number, productId: number, newAmount: number) {
+    return this.http.patch<Order>(`${this.baseUrl}/by-user/${userId}/active/change-product-amount`, {product_id: productId, quantity: newAmount});
+  }
+
   closeOrder(orderId: number): Observable<Order> {
     return this.http.patch<Order>(`${this.baseUrl}/${orderId}/change-status`, {status: 'closed'});
   }

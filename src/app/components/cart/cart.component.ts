@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class CartComponent {
     @Input() order: Order | undefined;
     @Input() parentClass: string = '';
+    isLoading: boolean = false;
     
     constructor(
         private orderService: OrderService,
@@ -59,4 +60,6 @@ export class CartComponent {
             });
         });
     }
+
+    
 }

@@ -1,9 +1,10 @@
 <div class="cart-order-products-container" [ngClass]="parentClass" *ngIf="order">
-  <app-order-products [products]="order.products" [active]="order.status == 'active'"></app-order-products> <br>
-  <div class="date">Fecha del Pedido: {{ order.date | date:'medium' }}</div>
-  <div *ngIf="order.status == 'active'" class="actions-container">
-    <button nbButton status="danger" (click)="closeOrder(order.id)">Cancelar</button>
-    <button nbButton status="primary" (click)="payOrder(order.id)">Ir a Pagar</button>
+  <app-order-products [products]="order.products" [active]="order.status == 'active'" [(loading)]="isLoading"></app-order-products> <br>
+  <div class="date">Fecha del Pedido {{isLoading}}: {{ order.date | date:'medium' }}</div>
+  <div *ngIf="order.status == 'active' || order.status == 'pending' || order.status == 'failed'" class="actions-container">
+    <div *ngIf="isLoading" class="spinner">Modificando Orden ...</div>
+    <button nbButton status="danger" [disabled]="isLoading" (click)="closeOrder(order.id)">Cancelar</button>
+    <button nbButton status="primary" [disabled]="isLoading" (click)="payOrder(order.id)">Ir a Pagar</button>
   </div>
 </div>
 <div *ngIf="!order" class="empty-cart-container">
