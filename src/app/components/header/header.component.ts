@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
     }
     return '';
   }
- 
+
   // Verificar si hay usuario logueado
   private checkAuthStatus(): void {
     const userData = localStorage.getItem('currentUser');

@@ -2,4 +2,55 @@ app-header {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 0 70px;
 }
+
+::ng-deep nb-layout-header {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &:not(.scrolled) {
+    app-header {
+      .title, a, span {
+        color: white !important;
+      }
+
+      nb-action {
+        color: white !important;
+      }
+
+      ::ng-deep nb-icon {
+        color: white !important;
+      }
+
+      .logo-container {
+        .title {
+          color: white !important;
+        }
+      }
+    }
+  }
+
+  &.scrolled {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    app-header {
+      .title, a, span {
+        color: inherit !important;
+      }
+
+      nb-action {
+        color: inherit !important;
+      }
+
+      ::ng-deep nb-icon {
+        color: inherit !important;
+      }
+    }
+  }
+}
+

@@ -35,11 +35,6 @@
   z-index: 2;
   text-align: start;
   max-width: 650px;
-  padding: 2rem;
-  @media (max-width: 768px) {
-    padding: 1rem;
-    max-width: 90%;
-  }
 }
 
 .hero-title {
