@@ -64,8 +64,31 @@ export class HeaderComponent implements OnInit {
 
   fetchActiveOrder(): void {
     this.orderService.getActiveOrderByUser(this.currentUser.id).subscribe((order: Order) => {
+      console.log('Header fetchActiveOrder - Respuesta del backend:', order);
       if (order.hasOwnProperty('id')) {
+        // Filtrar productos con cantidad 0 antes de asignar
+        if (order.products && order.order_products) {
+          console.log('Header fetchActiveOrder - Productos antes del filtro:', order.products);
+          console.log('Header fetchActiveOrder - Order products:', order.order_products);
+
+          order.products = order.products.filter(product => {
+            const orderProductQuantity = order.order_products.find(op => op.product_id === product.id)?.quantity || 0;
+            const shouldInclude = orderProductQuantity > 0;
+            console.log(`Header: Producto ${product.name} (ID: ${product.id}): quantity=${orderProductQuantity}, incluir=${shouldInclude}`);
+            return shouldInclude;
+          });
+
+          console.log('Header fetchActiveOrder - Productos después del filtro:', order.products);
+
+          // Asignar cantidades a los productos
+          order.products.forEach(product => {
+            const orderProductQuantity = order.order_products.find(op => op.product_id === product.id)?.quantity || 0;
+            product.quantity = orderProductQuantity;
+          });
+        }
         this.activeOrder = order;
+      } else {
+        this.activeOrder = undefined;
       }
     });
   }
