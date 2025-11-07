@@ -127,6 +127,37 @@ nb-action a, .logo-container {
   }
 }
 
+// Estilos para el popover de filtros
+.filters-popover {
+  nb-card-header {
+    font-weight: 600;
+    padding: 1rem;
+  }
+
+  nb-card-body {
+    padding: 1rem;
+  }
+
+  nb-card-footer {
+    padding: 0.75rem 1rem;
+    background-color: var(--color-basic-100);
+  }
+
+  .filter-item {
+    input[nbInput] {
+      &:focus {
+        border-color: var(--color-primary-default);
+      }
+    }
+
+    button[nbButton] {
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
 // Responsive
 @media (max-width: 800px) {
   .center {

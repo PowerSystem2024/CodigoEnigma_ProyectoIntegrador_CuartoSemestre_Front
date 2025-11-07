@@ -1,6 +1,6 @@
-import { NbMenuService, NbSearchService, NbDialogService, NbDialogRef, NbPopoverModule } from '@nebular/theme';
+import { NbMenuService, NbSearchService, NbDialogService, NbDialogRef, NbPopoverModule, NbPopoverDirective } from '@nebular/theme';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 import { NebularModule } from '../../shared/nebular-module';
 import { Order } from '../../models/order.model';
@@ -30,6 +30,15 @@ export class HeaderComponent implements OnInit {
   currentUser: any = null;
   isLoggedIn = false;
   activeOrder: Order | undefined;
+
+  // Propiedades para el filtro mejorado
+  searchQuery: string = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  selectedSizes: string[] = [];
+    hasActiveFilters: boolean = false;
+
+  @ViewChild('filtersPopover', { static: false }) filtersPopover?: NbPopoverDirective;
 
   constructor(
     private orderService: OrderService,
@@ -190,5 +199,76 @@ export class HeaderComponent implements OnInit {
 
   goToOrders(): void {
     this.router.navigate(['/my-order']);
+  }
+
+  // ==========================================
+  // Métodos para el filtro mejorado
+  // ==========================================
+  
+  clearSizes() {
+    this.selectedSizes = [];
+  }
+
+  toggleSize(size: string) {
+    if (this.selectedSizes.includes(size)) {
+      this.selectedSizes = this.selectedSizes.filter(s => s !== size);
+    } else {
+      this.selectedSizes.push(size);
+    }
+  }
+
+  isSizeSelected(size: string): boolean {
+    return this.selectedSizes.includes(size);
+  }
+
+  clearHeaderFilters() {
+    this.searchQuery = '';
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.selectedSizes = [];
+      this.hasActiveFilters = false;
+
+    // Emitir evento para volver a vista por categorías
+    this.eventBusService.emit({
+      type: 'clear-product-filters-header',
+      payload: {}
+    });
+  }
+
+  applyFiltersFromHeader() {
+    // Construir objeto de filtros
+    const filters: any = {};
+    
+    if (this.searchQuery && this.searchQuery.trim()) {
+      filters.search_query = this.searchQuery.trim();
+    }
+    
+    if (this.minPrice !== null && this.minPrice > 0) {
+      filters.min_price = this.minPrice;
+    }
+    
+    if (this.maxPrice !== null && this.maxPrice > 0) {
+      filters.max_price = this.maxPrice;
+    }
+    
+    if (this.selectedSizes.length > 0) {
+      // El backend espera un string con el tamaño, si hay múltiples
+      // podrías enviarlos separados por coma o solo el primero
+      filters.size = this.selectedSizes.join(',');
+    }
+
+      // Marcar que hay filtros activos
+      this.hasActiveFilters = Object.keys(filters).length > 0;
+
+    // Emitir evento con los filtros para que el componente de productos los use
+    this.eventBusService.emit({
+      type: 'product-filters-header',
+      payload: filters
+    });
+
+    // Navegar a la página de productos si no estamos en ella
+    if (!this.router.url.includes('/products')) {
+      this.router.navigate(['/products'], { queryParams: filters });
+    }
   }
 }

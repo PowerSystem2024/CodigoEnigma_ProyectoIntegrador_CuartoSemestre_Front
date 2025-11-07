@@ -15,8 +15,43 @@
 
 <div class="right">
   <nb-actions size="medium" class="actions-right">
-    <!-- Buscador -->
-    <nb-action icon="search-outline" (click)="openSearch()"></nb-action>
+    <!-- Buscador con Filtros -->
+    <nb-action icon="search-outline" 
+               [nbPopover]="filtersTpl" 
+               #filtersPopover="nbPopover"
+               nbPopoverPlacement="bottom" 
+               nbPopoverTrigger="click"
+                 [badgeText]="hasActiveFilters ? '!' : ''"
+                 badgePosition="top right"
+                 badgeStatus="warning"
+               title="Buscar y Filtrar"></nb-action>
+    
+    <ng-template #filtersTpl>
+      <nb-card class="filters-popover" style="min-width: 280px">
+        <nb-card-header>Filtros de Búsqueda</nb-card-header>
+        <nb-card-body>
+          <div class="filter-item" style="margin-bottom:8px;">
+            <input nbInput fullWidth placeholder="Buscar productos..." [(ngModel)]="searchQuery" />
+          </div>
+          <div class="filter-item" style="display:flex; gap:8px; margin-bottom:8px;">
+            <input nbInput style="flex:1;" type="number" placeholder="Precio mín" [(ngModel)]="minPrice" />
+            <input nbInput style="flex:1;" type="number" placeholder="Precio máx" [(ngModel)]="maxPrice" />
+          </div>
+          <div class="filter-item" style="margin-bottom:8px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+            <span style="min-width:60px;">Tamaño:</span>
+            <button nbButton size="tiny" [status]="selectedSizes.length === 0 ? 'primary' : 'basic'" (click)="$event.stopPropagation(); clearSizes()">Todos</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Chica') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Chica')">Chica</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Mediana') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Mediana')">Mediana</button>
+            <button nbButton size="tiny" [status]="isSizeSelected('Grande') ? 'primary' : 'basic'" (click)="$event.stopPropagation(); toggleSize('Grande')">Grande</button>
+          </div>
+        </nb-card-body>
+        <nb-card-footer style="display:flex; gap:8px; justify-content:flex-end;">
+          <button nbButton status="basic" size="small" (click)="clearHeaderFilters()">Limpiar</button>
+          <button nbButton status="primary" size="small" (click)="applyFiltersFromHeader(); filtersPopover.hide()">Aplicar</button>
+        </nb-card-footer>
+      </nb-card>
+    </ng-template>
+
     <nb-action icon="shopping-cart-outline" [nbPopover]="cart" nbPopoverPlacement="bottom" [badgeText]="getTotalItems()"
                badgePosition="bottom right" badgeStatus="info" title="Cart"></nb-action>
     <ng-template #cart>

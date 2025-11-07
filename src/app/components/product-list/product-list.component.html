@@ -21,6 +21,11 @@
 </div>
 
 <div *ngIf="!hasFilters" class="products-container home-main-container">
+  <div *ngIf="products.length === 0" style="text-align: center; padding: 3rem;">
+    <nb-icon icon="search-outline" style="font-size: 4rem; color: #ccc;"></nb-icon>
+    <h3>No se encontraron productos</h3>
+    <p>Intenta ajustar tus filtros de búsqueda</p>
+  </div>
   <app-product-item class="product-item" *ngFor="let product of products" [product]="product">
   </app-product-item>
 </div>
