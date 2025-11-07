@@ -16,3 +16,12 @@ app-root {
   display: block;
   background: var(--background-color);
 }
+
+// Eliminar espacios del layout de Nebular
+nb-layout-column {
+  padding: 0 !important;
+}
+
+nb-layout .layout-container {
+  padding: 0 !important;
+}

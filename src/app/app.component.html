@@ -1,11 +1,9 @@
 <nb-layout>
-  <nb-layout-header fixed class="space-between">
+  <nb-layout-header fixed class="space-between" [class.scrolled]="isScrolled">
     <app-header></app-header>
   </nb-layout-header>
   <nb-layout-column>
     <router-outlet></router-outlet>
   </nb-layout-column>
-  <nb-layout-footer>
-    Contact us
-  </nb-layout-footer>
 </nb-layout>
+<app-footer></app-footer>

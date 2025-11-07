@@ -16,6 +16,18 @@
 
 .right {
   gap: 0.5rem;
+  align-items: center;
+}
+
+// Alineación de acciones en el header
+::ng-deep .actions-right {
+  align-items: center;
+}
+
+::ng-deep .actions-right nb-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // Estilos del logo
@@ -42,10 +54,30 @@ nb-menu {
   width: 13rem;
 }
 
-// Estilos del buscador
-::ng-deep .search nb-icon {
-  height: 30px !important;
-  width: 30px !important;
+// Alineación de nb-actions
+::ng-deep nb-actions {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep nb-action {
+  display: flex;
+  align-items: center;
+}
+
+// Estilos de iconos del header
+::ng-deep nb-action nb-icon {
+  height: 24px !important;
+  width: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+::ng-deep .actions-right nb-action {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 // Estilos de enlaces
@@ -54,10 +86,14 @@ nb-action a, .logo-container {
   text-decoration: none;
 }
 
+::ng-deep nb-actions.size-medium nb-action {
+  border-left: none !important;
+  border-right: none !important;
+}
+
 // Estilos del menú personalizado de usuario
 .custom-user-menu {
   min-width: 200px;
-  padding: 0.5rem 0;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -67,7 +103,7 @@ nb-action a, .logo-container {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 0rem;
     cursor: pointer;
     transition: all 0.2s ease;
     border: none;
@@ -117,7 +153,7 @@ nb-action a, .logo-container {
   }
 }
 
-// Estilos para el contenedor del menú (puedes eliminar esto si no lo usas)
+
 .user-menu-container {
   padding: 0.5rem;
 

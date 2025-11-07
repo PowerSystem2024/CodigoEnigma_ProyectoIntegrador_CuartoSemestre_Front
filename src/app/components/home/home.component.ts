@@ -4,6 +4,7 @@ import { Category } from '../../models/category.model';
 import { ActivatedRoute } from '@angular/router';
 import { NebularModule } from '../../shared/nebular-module';
 import { ProductItemComponent } from '../product-item/product-item.component';
+import { HeroComponent } from '../hero/hero.component';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { ProductItemComponent } from '../product-item/product-item.component';
     NebularModule,
     FeaturedProductsComponent,
     ProductItemComponent,
+    HeroComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
