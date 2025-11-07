@@ -5,7 +5,7 @@ import { NebularModule } from '../../shared/nebular-module';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { OrderService } from '../../services/order.service';
-import { NbToastrService } from '@nebular/theme';
+import { EventBusService } from '../../shared/event-bus.service';
 
 @Component({
   selector: 'app-order-products',
@@ -32,16 +32,18 @@ export class OrderProductsComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private orderService: OrderService,
-    private toastrService: NbToastrService,
+    private eventBus: EventBusService
   ) {}
 
   ngOnInit(): void {
+    // Filtrar productos con cantidad 0 al inicializar
+    this.products = this.products.filter(product => product.quantity && product.quantity > 0);
     this.products.forEach(prod => this.oldQuantityDictionary[prod.id] = prod.quantity)
   }
 
   changeAmount(change: number, product: any): void {
     const newAmount = product.quantity + change;
-    
+
     if (newAmount >= 1) {
       product.quantity = newAmount;
       this.setLoading(true);
@@ -54,15 +56,25 @@ export class OrderProductsComponent implements OnInit {
           next: (res: any) => {
             product.quantity = newAmount;
             vm.oldQuantityDictionary[product.id] = newAmount;
+
+            // Emitir evento para notificar que el carrito se actualizó
+            vm.eventBus.emit({
+              type: 'cart-update',
+              payload: 'Product quantity changed'
+            });
+
             this.setLoading(false);
           },
           error: (err) => {
             product.quantity = vm.oldQuantityDictionary[product.id];
-            vm.toastrService.danger(`Hubo un problema al cambiar la cantidad de ${product.name}`, 'Error');
+            window.alert(`Hubo un problema al cambiar la cantidad de ${product.name}`);
             this.setLoading(false);
           }
         });
       }, 750);
+    } else if (newAmount === 0) {
+      // Si la cantidad llega a 0, eliminar el producto
+      this.removeProduct(product.id);
     }
   }
 
@@ -80,9 +92,43 @@ export class OrderProductsComponent implements OnInit {
   }
 
   removeProduct(productId: number): void {
-    let remove = window.confirm("Esta seguro que desea eliminar este producto de la orden?");
-    if (remove) {
-      this.products = this.products.filter(p => p.id !== productId);
+    // Usar confirmación nativa en lugar del diálogo de Nebular
+    const confirmed = window.confirm('¿Está seguro que desea eliminar este producto de la orden?');
+
+    if (confirmed) {
+      this.setLoading(true);
+      const userData = JSON.parse(localStorage.getItem('currentUser') || '');
+      const vm = this;
+
+      console.log('Eliminando producto:', productId, 'para usuario:', userData.id);
+
+      // Usar el mismo método que changeProdAmount pero con cantidad 0
+      this.orderService.removeProductFromOrder(userData.id, productId).subscribe({
+        next: (res: any) => {
+          console.log('Respuesta del servidor al eliminar:', res);
+          // Eliminar el producto de la lista local
+          vm.products = vm.products.filter(p => p.id !== productId);
+          delete vm.oldQuantityDictionary[productId];
+
+          // Emitir evento para notificar que el carrito se actualizó
+          vm.eventBus.emit({
+            type: 'cart-update',
+            payload: 'Product removed from cart',
+            productId: productId,
+            action: 'remove'
+          });
+
+          // Usar alert nativo en lugar de Nebular toastr
+          window.alert('Producto eliminado del carrito correctamente');
+          this.setLoading(false);
+        },
+        error: (err) => {
+          console.error('Error al eliminar producto:', err);
+          // Usar alert nativo en lugar de Nebular toastr
+          window.alert('Hubo un problema al eliminar el producto del carrito');
+          this.setLoading(false);
+        }
+      });
     }
   }
 
