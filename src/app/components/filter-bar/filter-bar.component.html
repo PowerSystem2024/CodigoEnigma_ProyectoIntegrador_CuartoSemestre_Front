@@ -1,0 +1,67 @@
+<nb-card>
+  <nb-card-header>Filtros</nb-card-header>
+  <nb-card-body class="filters-grid" [formGroup]="form">
+
+    <!-- Búsqueda -->
+    <div class="field">
+      <label>Buscar</label>
+      <input nbInput fullWidth placeholder="Nombre o descripción"
+             formControlName="search_query">
+      <small class="hint">Podés separar términos con espacios o comas.</small>
+    </div>
+
+    <!-- Categorías -->
+    <div class="field">
+      <label>Categorías</label>
+      <nb-select placeholder="Seleccioná categorías"
+                 formControlName="category_id" multiple fullWidth>
+        <nb-option *ngFor="let c of categories" [value]="c.id">
+          {{ c.name }}
+        </nb-option>
+      </nb-select>
+    </div>
+
+    <!-- Precio -->
+    <div class="field two">
+      <label>Precio</label>
+      <div class="price-row">
+        <input nbInput type="number" min="0" placeholder="Mín."
+               formControlName="min_price">
+        <span class="dash">—</span>
+        <input nbInput type="number" min="0" placeholder="Máx."
+               formControlName="max_price">
+      </div>
+    </div>
+
+    <!-- Tamaño -->
+    <div class="field">
+      <label>Tamaño</label>
+      <nb-select placeholder="Seleccioná tamaño" formControlName="size" multiple fullWidth>
+        <nb-option *ngFor="let s of sizes" [value]="s">{{ s }}</nb-option>
+      </nb-select>
+    </div>
+
+    <!-- Nivel de cuidado -->
+    <div class="field">
+      <label>Nivel de cuidado</label>
+      <nb-select placeholder="Seleccioná nivel" formControlName="care" multiple fullWidth>
+        <nb-option *ngFor="let c of careLevels" [value]="c">{{ c }}</nb-option>
+      </nb-select>
+    </div>
+
+    <!-- AND / OR legible -->
+    <div class="field">
+      <label>Coincidir con</label>
+      <nb-radio-group formControlName="modo" class="mode-group">
+        <nb-radio value="and">Todas las condiciones</nb-radio>
+        <nb-radio value="or">Cualquiera de las condiciones</nb-radio>
+      </nb-radio-group>
+    </div>
+
+  </nb-card-body>
+
+  <nb-card-footer class="actions">
+    <button nbButton status="primary" (click)="submit()">Aplicar filtros</button>
+    <button nbButton status="basic" (click)="reset()">Limpiar</button>
+  </nb-card-footer>
+</nb-card>
