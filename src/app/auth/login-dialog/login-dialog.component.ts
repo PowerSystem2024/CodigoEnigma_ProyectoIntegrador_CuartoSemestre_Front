@@ -83,7 +83,7 @@ export class LoginDialogComponent {
 
         // GUARDAR USUARIO EN LOCALSTORAGE PARA MOSTRAR EN HEADER
         localStorage.setItem('currentUser', JSON.stringify(res.user));
-        localStorage.setItem('userid', res.token);
+        localStorage.setItem('access_token', res.token);
 
         this.toastrService.success('Login exitoso', `¡Bienvenido de nuevo, ${res.user.name}!`);
         console.log('✅ Usuario logueado:', res.user.name); // ✅ CORREGIDO: "logueado"
