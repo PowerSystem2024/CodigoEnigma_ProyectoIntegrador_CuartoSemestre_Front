@@ -20,13 +20,13 @@ import {
   NbContextMenuModule,
   NbBadgeModule,
   NbSpinnerModule,
-  NbToggleComponent,
   NbCheckboxModule,
   NbSelectModule,
   NbTooltipModule,
   NbAccordionModule,
   NbAlertModule,
   NbToggleModule,
+  NbRadioModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -34,11 +34,13 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 @NgModule({
   imports: [
     CommonModule,
-    NbThemeModule.forRoot(),
+    // Import Nebular modules WITHOUT forRoot here.
+    // Root providers are configured in main.ts via bootstrapApplication.
+    NbThemeModule,
     NbLayoutModule,
-    NbDialogModule.forRoot(),
-    NbToastrModule.forRoot(),
-    NbMenuModule.forRoot(),
+    NbDialogModule,
+    NbToastrModule,
+    NbMenuModule,
     NbUserModule,
     NbInputModule,
     NbButtonModule,
@@ -59,6 +61,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbTooltipModule,
     NbAccordionModule,
     NbAlertModule,
+    NbRadioModule,
   ],
   exports: [
     CommonModule,
@@ -87,7 +90,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbTooltipModule,
     NbAccordionModule,
     NbAlertModule,
-    NbToggleComponent,
+    NbRadioModule,
   ]
 })
 export class NebularModule {}

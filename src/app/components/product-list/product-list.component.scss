@@ -28,3 +28,15 @@
   margin: 0 auto;
 
 }
+
+.product-page {
+  display: grid;
+  grid-template-columns: min(22rem, 30%) 1fr;
+  gap: 1rem;
+}
+.sidebar {
+  position: relative;
+}
+.content {
+  min-height: 50vh;
+}

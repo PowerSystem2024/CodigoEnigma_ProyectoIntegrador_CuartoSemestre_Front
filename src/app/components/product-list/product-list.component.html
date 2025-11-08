@@ -1,26 +1,43 @@
-<div *ngIf="hasFilters" class="categories-container home-main-container">
-  <div *ngFor="let category of categories">
-    <ng-container>
-      <nb-card style="margin: 15px;">
-        <nb-card-header>
-          {{ category.name }}
-        </nb-card-header>
+<div class="product-page home-main-container">
+  <div class="sidebar">
+    <app-filters-sidebar
+      [categories]="categories"
+      [initialFilters]="initialFilters"
+      (filtersChange)="onFiltersChange($event)"
+    ></app-filters-sidebar>
+  </div>
+
+  <div class="content">
+    <div *ngIf="hasFilters" class="categories-container">
+      <div *ngFor="let category of categories">
+        <ng-container>
+          <nb-card style="margin: 15px;">
+            <nb-card-header>
+              {{ category.name }}
+            </nb-card-header>
+            <nb-card-body>
+              <div class="categoty-products-container">
+                <app-product-item 
+                  class="product-item" 
+                  *ngFor="let product of category.products" 
+                  [product]="product"
+                  [category]="category.id">
+                </app-product-item>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="!hasFilters" class="products-container">
+      <nb-card style="margin: 15px;" *ngIf="isLoading">
         <nb-card-body>
-          <div class="categoty-products-container">
-            <app-product-item 
-              class="product-item" 
-              *ngFor="let product of category.products" 
-              [product]="product"
-              [category]="category.id">
-            </app-product-item>
-          </div>
+          <nb-spinner size="large">Cargando productos…</nb-spinner>
         </nb-card-body>
       </nb-card>
-    </ng-container>
+      <app-product-item class="product-item" *ngFor="let product of products" [product]="product">
+      </app-product-item>
+    </div>
   </div>
-</div>
-
-<div *ngIf="!hasFilters" class="products-container home-main-container">
-  <app-product-item class="product-item" *ngFor="let product of products" [product]="product">
-  </app-product-item>
 </div>
