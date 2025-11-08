@@ -40,7 +40,12 @@ export const routes: Routes = [
             resolve: {
                 orders: myOrdersResolver
             }
-    }, {
+    }, {// [QuienesSomos] AGREGADO: ruta para la página de Quienes Somos
+    path: 'quienes-somos',
+    loadComponent: () =>
+        import('./components/quienes-somos/quienes-somos.component')
+        .then(m => m.QuienesSomosComponent)
+    },{
         path: '**',
         loadComponent: () =>
             import('./components/not-found/not-found.component')
