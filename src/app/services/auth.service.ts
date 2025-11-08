@@ -1,64 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LoginPayload, LoginResponse, RegisterPayload, RegisterResponse } from '../models/auth.model';
+import { environment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/';
+  private apiUrl = `${environment.apiUrl}api/auth/`;
 
   constructor(private http: HttpClient) {}
 
-  // REGISTER - Usa el nombre real del payload
+  // REGISTER - Conecta al endpoint real
   register(payload: RegisterPayload): Observable<RegisterResponse> {
     console.log('📝 Registrando usuario:', payload);
-
-    return of({
-      token: 'fake-jwt-token-' + Date.now(),
-      user: {
-        id: Math.floor(Math.random() * 1000),
-        name: payload.name, // ✅ USA EL NOMBRE REAL DEL FORMULARIO
-        email: payload.email
-      }
-    }).pipe(delay(800));
+    return this.http.post<RegisterResponse>(`${this.apiUrl}register`, payload);
   }
 
-  // LOGIN CORREGIDO
+  // LOGIN - Conecta al endpoint real
   login(payload: LoginPayload): Observable<LoginResponse> {
     console.log('📤 Enviando login:', payload);
-
-    // SIMULAR USUARIOS EXISTENTES CON NOMBRES REALES
-    const mockUsers = [
-      { email: 'lupita@prueba.com', name: 'Lupita González', id: 1 },
-      { email: 'juan@prueba.com', name: 'Juan Pérez', id: 2 },
-      { email: 'maria@prueba.com', name: 'María Rodríguez', id: 3 }
-    ];
-
-    const foundUser = mockUsers.find(user => user.email === payload.email);
-
-    if (foundUser) {
-      // USUARIO EXISTENTE - Retorna nombre real
-      return of({
-        token: `fake-jwt-token-${foundUser.id}`,
-        user: {
-          id: foundUser.id,
-          name: foundUser.name,
-          email: foundUser.email
-        }
-      }).pipe(delay(800));
-    } else {
-      // NUEVO USUARIO - Usa el email como nombre temporal
-      return of({
-        token: `fake-jwt-token-new-${Date.now()}`,
-        user: {
-          id: Math.floor(Math.random() * 1000),
-          name: payload.email.split('@')[0],
-          email: payload.email
-        }
-      }).pipe(delay(800));
-    }
+    return this.http.post<LoginResponse>(`${this.apiUrl}login`, payload).pipe(
+      map((response: any) => {
+        // Mapear la respuesta del backend al formato esperado por el frontend
+        return {
+          token: response.access_token,
+          user: {
+            id: response.user.id,
+            name: response.user.name,
+            email: response.user.email
+          }
+        };
+      })
+    );
   }
 }
