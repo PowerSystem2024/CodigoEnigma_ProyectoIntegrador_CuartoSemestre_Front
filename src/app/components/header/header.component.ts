@@ -212,6 +212,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToOrders(): void {
-    this.router.navigate(['/my-order']);
+    this.router.navigate(['/my-orders']);
   }
 }

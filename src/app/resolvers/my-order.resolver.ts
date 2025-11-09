@@ -7,5 +7,5 @@ import { Order } from '../models/order.model';
 export const myOrdersResolver: ResolveFn<Order> = () => {
   const orderService = inject(OrderService);
   const user = JSON.parse(localStorage.getItem('currentUser')!);
-  return orderService.getActiveOrderByUser(user.id);
+  return orderService.getOrdersByUser(user.id);
 };

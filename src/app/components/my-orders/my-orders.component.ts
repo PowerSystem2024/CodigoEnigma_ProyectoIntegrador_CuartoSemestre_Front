@@ -27,13 +27,11 @@ export class MyOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const activeOrder = this.route.snapshot.data['orders'];
-    console.log('MyOrders: Orden activa recibida del resolver:', activeOrder);
+    const userOrders = this.route.snapshot.data['orders'];
     
     // Mostrar la orden activa (carrito) en "Mis pedidos"
-    this.orders = activeOrder && activeOrder.id ? [activeOrder] : [];
+    this.orders = userOrders || [];
     
-    console.log('MyOrders: Órdenes a mostrar (carrito):', this.orders);
     this.processOrders();
 
     // Escuchar eventos de actualización del carrito
@@ -92,7 +90,10 @@ export class MyOrdersComponent implements OnInit {
         if (updatedOrder.hasOwnProperty('id')) {
           console.log('MyOrders: Carrito actualizado desde el servidor:', updatedOrder);
           this.processOrderProducts(updatedOrder);
-          this.orders = [updatedOrder];
+          const index = this.orders.findIndex(order => order.id === updatedOrder.id);
+          if (index !== -1) {
+            this.orders[index] = updatedOrder;
+          }
           console.log('MyOrders: Órdenes después de la actualización:', this.orders);
         } else {
           console.log('MyOrders: No se recibió una orden válida del servidor');
