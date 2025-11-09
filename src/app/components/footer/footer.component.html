@@ -1,87 +1,72 @@
 <footer class="footer">
-  <div class="footer-main">
-    <!-- Sección de marca -->
-    <div class="footer-section brand-section">
-      <div class="brand">
-        <nb-icon icon="shopping-bag-outline" class="brand-icon"></nb-icon>
-        <h2 class="brand-name">Verdisimo</h2>
-      </div>
-      <p class="brand-description">
-      Redes Sociales:
-      </p>
+  <div class="footer-container">
+    <div class="footer-main">
+      <!-- Sección de marca -->
+      <div class="footer-section brand-section">
+        <div class="brand">
 
-      <div class="social-links">
-        <a
-          href="https://"
-          target="_blank"
-          class="social-link"
-          aria-label="Instagram"
-        >
-          <nb-icon icon="camera-outline"></nb-icon>
-        </a>
-        <a
-          href="https://"
-          target="_blank"
-          class="social-link"
-          aria-label="Facebook"
-        >
-          <nb-icon icon="facebook-outline"></nb-icon>
-        </a>
-        <a
-          href="https://"
-          target="_blank"
-          class="social-link"
-          aria-label= "TikTok"
-        >
-          <nb-icon icon="message-circle-outline"></nb-icon>
-        </a>
-      </div>
-    </div>
-
-    <!-- Navegación -->
-    <div class="footer-section">
-      <h4 class="footer-title">Navegación</h4>
-      <ul class="footer-links">
-        <li><a routerLink="/">Inicio</a></li>
-        <li><a routerLink="/products">Catálogo</a></li>
-        <li><a routerLink="/my-orders">Mis Pedidos</a></li>
-      </ul>
-    </div>
-
-    <!-- Ayuda -->
-    <div class="footer-section">
-      <h4 class="footer-title">Ayuda</h4>
-      <ul class="footer-links">
-        <li><a href="#">Preguntas Frecuentes</a></li>
-        <li><a href="#">Envíos</a></li>
-        <li><a href="#">Devoluciones</a></li>
-        <li><a href="#">Contacto</a></li>
-      </ul>
-    </div>
-
-    <!-- Contacto -->
-    <div class="footer-section">
-      <h4 class="footer-title">Contacto</h4>
-      <div class="contact-info">
-        <div class="contact-item">
-          <nb-icon icon="email-outline"></nb-icon>
-          <span>info&#64;verdisimo.com</span>
+          <h3 class="brand-name">Verdisimo</h3>
         </div>
-        <div class="contact-item">
-          <nb-icon icon="phone-outline"></nb-icon>
-          <span>+54 11 1234-5678</span>
+        <p class="brand-description">
+          Tu tienda en línea de plantas para el hogar y la oficina.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Facebook">
+            <nb-icon icon="facebook-outline"></nb-icon>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <nb-icon icon="camera-outline"></nb-icon>
+          </a>
+          <a href="#" class="social-link" aria-label="WhatsApp">
+            <nb-icon icon="phone-outline"></nb-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <div class="footer-section">
+        <h4 class="footer-title">Navegación</h4>
+        <ul class="footer-links">
+          <li><a routerLink="/">Inicio</a></li>
+          <li><a routerLink="/products">Catálogo</a></li>
+          <li><a routerLink="/my-orders">Mis Pedidos</a></li>
+        </ul>
+      </div>
+
+      <!-- Ayuda -->
+      <div class="footer-section">
+        <h4 class="footer-title">Ayuda</h4>
+        <ul class="footer-links">
+          <li><a href="#">Preguntas Frecuentes</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="footer-section">
+        <h4 class="footer-title">Contacto</h4>
+        <div class="contact-info">
+          <div class="contact-item">
+            <nb-icon icon="email-outline"></nb-icon>
+            <span>info&#64;verdisimo.com</span>
+          </div>
+          <div class="contact-item">
+            <nb-icon icon="phone-outline"></nb-icon>
+            <span>+54 11 1234-5678</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer inferior -->
-  <div class="footer-bottom">
-    <p class="copyright">© {{ currentYear }} Verdisimo. Todos los derechos reservados.</p>
-    <div class="payment-info">
-      <nb-icon icon="shield-outline"></nb-icon>
-      <span>Pagos seguros</span>
+    <!-- Footer inferior -->
+    <div class="footer-bottom">
+      <p class="copyright">© {{ currentYear }} Verdisimo. Todos los derechos reservados.</p>
+      <div class="payment-info">
+        <nb-icon icon="shield-outline"></nb-icon>
+        <span>Pagos seguros</span>
+      </div>
     </div>
   </div>
 </footer>
-
