@@ -1,0 +1,51 @@
+<nb-card class="filters-card">
+  <nb-card-header>Filtros</nb-card-header>
+  <nb-card-body>
+    <div class="filter-group">
+      <label>Categorías</label>
+      <nb-select placeholder="Selecciona categorías" multiple [(selected)]="selectedCategoryIds">
+        <nb-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</nb-option>
+      </nb-select>
+    </div>
+
+    <div class="filter-group">
+      <label>Búsqueda</label>
+      <input nbInput fullWidth placeholder="Buscar..." [(ngModel)]="searchTerm" />
+    </div>
+
+    <div class="price-group">
+      <div>
+        <label>Precio mínimo</label>
+        <input nbInput type="number" min="0" [(ngModel)]="minPrice" />
+      </div>
+      <div>
+        <label>Precio máximo</label>
+        <input nbInput type="number" min="0" [(ngModel)]="maxPrice" />
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Tamaño</label>
+      <input nbInput fullWidth placeholder="small,medium,large" [(ngModel)]="sizeInput" />
+    </div>
+
+    <div class="filter-group">
+      <label>Cuidado</label>
+      <input nbInput fullWidth placeholder="baja,media,alta" [(ngModel)]="careInput" />
+    </div>
+
+    <div class="filter-group">
+      <label>Coincidir con</label>
+      <nb-radio-group [(ngModel)]="matchMode">
+        <nb-radio value="all">Todas las condiciones</nb-radio>
+        <nb-radio value="any">Cualquiera de las condiciones</nb-radio>
+      </nb-radio-group>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="actions">
+      <button nbButton status="primary" (click)="applyFilters()">Aplicar filtros</button>
+      <button nbButton status="basic" (click)="clearFilters()">Limpiar</button>
+    </div>
+  </nb-card-footer>
+</nb-card>

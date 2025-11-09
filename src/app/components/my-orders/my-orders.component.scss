@@ -41,6 +41,11 @@ nb-accordion-item-header {
     color: var(--terciary-color-text);
 }
 
+.center-container {
+    max-width: 85rem;
+    margin: 0 auto;
+    padding: 0 1rem 1rem 1rem;
+}
 
 nb-accordion-item-body {
     padding: 0 1rem !important;

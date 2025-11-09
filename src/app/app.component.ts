@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
-// IMPORTA TUS COMPONENTES
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 
-// NEBULAR
+// Si usás Nebular (parece que sí por el import)
 import { NbLayoutModule } from '@nebular/theme';
 
 @Component({
@@ -23,8 +21,6 @@ import { NbLayoutModule } from '@nebular/theme';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ecommerce-app';
-
-  // AÑADE ESTA VARIABLE PARA EL SCROLL
+  title = 'ecomerse-app';
   isScrolled = false;
 }

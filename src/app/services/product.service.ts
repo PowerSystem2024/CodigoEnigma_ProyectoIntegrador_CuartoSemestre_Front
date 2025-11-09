@@ -8,7 +8,7 @@ import { environment } from '../../../environment';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = `${environment.apiUrl}/products`;
+  private baseUrl = `${environment.apiUrl}products`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class ProductService {
   getProduct(id: string | number): Observable<Product> {
     return this.http.get<Product>(this.baseUrl+`/${id}`);
   }
-  
+
   addToCart(id: string | number, data: { quantity: number, user_id: number }): Observable<any> {
     return this.http.post<any>(this.baseUrl+`/${id}/add_to_cart`, data);
   }
@@ -32,5 +32,5 @@ export class ProductService {
 
     return this.http.get<Product[]>(url);
   }
-  
+
 }
