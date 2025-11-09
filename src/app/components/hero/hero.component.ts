@@ -21,7 +21,7 @@ export class HeroComponent {
   @Input() buttonText!: string;
 
 
-  @Input() buttonRoute!: string;
+  @Input() buttonRoute!: '/products';
 
 
   @Input() backgroundImage!: string;
@@ -31,8 +31,6 @@ export class HeroComponent {
   constructor(private router: Router) {}
 
   onButtonClick(): void {
-    if (this.buttonRoute) {
-      this.router.navigate([this.buttonRoute]);
-    }
+    this.router.navigate([this.buttonRoute || '/products']);
   }
 }
