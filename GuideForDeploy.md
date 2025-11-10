@@ -1,5 +1,8 @@
 # 📋 Documentación Técnica - Deploy E-commerce Fullstack
 
+## **DISCLAIMER: Esto es una documentación técnica para el correcto Deploy de este proyecto de forma local, o como lo realizamos nosotros a traves de Vercel**
+### **Si solo se necesita levantar el proyecto para pruebas, seguir los pasos indicados en el Readme alojado en backend de este proyecto**
+
 **Stack Tecnológico:**
 - Backend: Flask 3.1.0 + SQLAlchemy + MySQL
 - Frontend: Angular 19.2.15 + Nebular UI
