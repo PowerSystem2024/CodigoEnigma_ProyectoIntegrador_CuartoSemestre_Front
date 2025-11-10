@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   // Cambia esta URL al host real de tu backend
-  apiUrl: 'http://127.0.0.1:5000/',
+  apiUrl: 'https://codigo-enigma-back.vercel.app/',
 };
